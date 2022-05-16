@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  iot:
+    image: "iot"
+    build:
+      context: ./IoT/
+      dockerfile: Dockerfile
+    container_name : iot
+    environment:
+      - SENSOR=sensor
+
+  sensor1:
+    image: "sensor"
+    build:
+      context: ./Sensor/
+      dockerfile: Dockerfile
+    container_name: sensor1
+    environment:
+      - DESTINATION=iot
