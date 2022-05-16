@@ -1,20 +1,22 @@
 version: '3'
 
 services:
-  iot:
-    image: "iot"
+  server:
+    image: "server"
     build:
-      context: ./IoT/
+      context: ./IoT-Gateway/
       dockerfile: Dockerfile
-    container_name : iot
+    container_name : server
     environment:
-      - SENSOR=sensor
+      - client=client
 
-  sensor1:
-    image: "sensor"
+  client:
+    image: "client"
     build:
       context: ./Sensor/
       dockerfile: Dockerfile
-    container_name: sensor1
+    container_name: client
     environment:
-      - DESTINATION=iot
+      - DESTINATION=server
+
+

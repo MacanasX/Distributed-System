@@ -50,10 +50,10 @@ public class Client {
 
 
         DatagramSocket Socket = new DatagramSocket();
-        InetAddress Address = InetAddress.getByName("localhost");
+        InetAddress Address = InetAddress.getByName("server") ; //InetAddress.getLocalHost()
 
         Client sender = new Client(Socket,Address);
-        System.out.println("-- Running UDP Client at " + InetAddress.getLocalHost() + " --");
+        System.out.println("-- Running UDP Client attt " + InetAddress.getLocalHost() + " --");
 
         sender.start();
     }

@@ -4,6 +4,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.util.concurrent.TimeUnit;
 
 public class Server {
     private DatagramSocket udpSocket;
@@ -28,6 +29,9 @@ public class Server {
 
                 System.out.println(
                         "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
+
+                TimeUnit.SECONDS.sleep(5);
+
             }
             catch(IOException e){
                 e.printStackTrace();
