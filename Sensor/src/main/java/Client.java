@@ -48,12 +48,12 @@ public class Client {
     }
     public static void main(String[] args) throws NumberFormatException, IOException {
 
-
+        String dest = System.getenv("DESTINATION");
         DatagramSocket Socket = new DatagramSocket();
-        InetAddress Address = InetAddress.getByName("server") ; //InetAddress.getLocalHost()
+        InetAddress Address = InetAddress.getByName(dest) ; //InetAddress.getLocalHost()
 
         Client sender = new Client(Socket,Address);
-        System.out.println("-- Running UDP Client attt " + InetAddress.getLocalHost() + " --");
+        System.out.println("-- Running UDP Client at " + InetAddress.getLocalHost() + " --");
 
         sender.start();
     }

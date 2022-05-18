@@ -2,7 +2,7 @@ version: '3'
 
 services:
   server:
-    image: "server"
+    image: groupe_b_9/server:latest
     build:
       context: ./IoT-Gateway/
       dockerfile: Dockerfile
@@ -11,12 +11,14 @@ services:
       - client=client
 
   client:
-    image: "client"
+    image: groupe_b_9/sensor:latest
     build:
       context: ./Sensor/
       dockerfile: Dockerfile
     container_name: client
     environment:
       - DESTINATION=server
+
+
 
 
