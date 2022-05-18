@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Client {
 
@@ -19,10 +20,12 @@ public class Client {
         this.inetAddress = inetAddress;
     }
 
-    private void start() throws IOException {
+    private void start()  {
+        String name = System.getenv("SENSOR_NAME");
 
+        String type = System.getenv("SENSOR_TYPE");
         Scanner scanner = new Scanner(System.in);
-        Sensor sensor1 = new Sensor(1,"Temperatursensor", "Temperatur");
+        Sensor sensor1 = new Sensor(1,name, type);
         SensorData sensorData = new SensorData(sensor1);
 
 
@@ -37,11 +40,15 @@ public class Client {
                 DatagramPacket p = new DatagramPacket(buffer, buffer.length, inetAddress, 1234);
 
                 udpSocket.send(p);
-
+                TimeUnit.SECONDS.sleep(5);
             }
 
             catch(IOException e){
                 e.printStackTrace();
+                break;
+            }
+            catch (InterruptedException k){
+                k.printStackTrace();
                 break;
             }
         }

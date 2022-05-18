@@ -1,23 +1,62 @@
 version: '3'
 
 services:
-  server:
+  iot:
     image: groupe_b_9/server:latest
     build:
       context: ./IoT-Gateway/
       dockerfile: Dockerfile
-    container_name : server
+    container_name : IotGateway
     environment:
-      - client=client
+      NUMBERPORTS: "4"
 
-  client:
+
+  sensor1:
     image: groupe_b_9/sensor:latest
     build:
       context: ./Sensor/
       dockerfile: Dockerfile
-    container_name: client
+    container_name: Sensor1
     environment:
-      - DESTINATION=server
+       DESTINATION: "iot"
+       SENSOR_NAME: "Heizung Wohnzimmer"
+       SENSOR_TYPE: "Temperatur"
+
+  sensor2:
+    image: groupe_b_9/sensor:latest
+
+    build:
+     context: ./Sensor/
+     dockerfile: Dockerfile
+    container_name: Sensor2
+    environment:
+     DESTINATION: "iot"
+     SENSOR_NAME: "Dachterrasse"
+     SENSOR_TYPE: "Helligkeit"
+
+  sensor3:
+    image: groupe_b_9/sensor:latest
+
+    build:
+      context: ./Sensor/
+      dockerfile: Dockerfile
+    container_name: Sensor3
+    environment:
+      DESTINATION: "iot"
+      SENSOR_NAME: "Dachterrasse"
+      SENSOR_TYPE: "Niederschlag"
+
+  sensor4:
+    image: groupe_b_9/sensor:latest
+
+    build:
+      context: ./Sensor/
+      dockerfile: Dockerfile
+    container_name: Sensor4
+    environment:
+      DESTINATION: "iot"
+      SENSOR_NAME: "Dach"
+      SENSOR_TYPE: "Wind"
 
 
 
