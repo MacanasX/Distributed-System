@@ -21,6 +21,7 @@ services:
        DESTINATION: "iot"
        SENSOR_NAME: "Heizung Wohnzimmer"
        SENSOR_TYPE: "Temperatur"
+       SENSOR_ID: "1"
 
   sensor2:
     image: groupe_b_9/sensor:latest
@@ -33,6 +34,7 @@ services:
      DESTINATION: "iot"
      SENSOR_NAME: "Dachterrasse"
      SENSOR_TYPE: "Helligkeit"
+     SENSOR_ID: "2"
 
   sensor3:
     image: groupe_b_9/sensor:latest
@@ -45,6 +47,7 @@ services:
       DESTINATION: "iot"
       SENSOR_NAME: "Dachterrasse"
       SENSOR_TYPE: "Niederschlag"
+      SENSOR_ID: "3"
 
   sensor4:
     image: groupe_b_9/sensor:latest
@@ -57,6 +60,7 @@ services:
       DESTINATION: "iot"
       SENSOR_NAME: "Dach"
       SENSOR_TYPE: "Wind"
+      SENSOR_ID: "4"
 
 
 

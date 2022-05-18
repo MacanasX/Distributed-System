@@ -1,9 +1,7 @@
 //package com.pgx.java.socket;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.InetAddress;
-import java.net.SocketException;
+import java.net.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +12,10 @@ public class Server extends Thread {
     public void run()
     {
         try {
-            this.listen();
+            while(true) {
+                this.PullRequest();
+                this.listen();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -29,18 +30,32 @@ public class Server extends Thread {
         System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
         String msg;
 
-        while(true) {
+       /* while(true) {
             try {
-                Threadlistening();
+
 
             }
             catch(IOException e){
                 e.printStackTrace();
                 break;
             }
-        }
+        }*/
+        Threadlistening();
     }
+    private synchronized void PullRequest() throws IOException, InterruptedException {
+        String [] sensoren = {"sensor1","sensor2","sensor3","sensor4"};
+        String pullMessage = "PULL";
+        byte [] messageBuffer = pullMessage.getBytes();
+        InetAddress Address = InetAddress.getByName(sensoren[0]);
+        DatagramPacket p = new DatagramPacket(messageBuffer, messageBuffer.length, Address, 1235);
 
+        udpSocket.send(p);
+
+
+
+
+
+    }
     private synchronized void Threadlistening() throws IOException, InterruptedException {
         String msg;
         byte[] buf = new byte[256];

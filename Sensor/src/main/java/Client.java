@@ -19,13 +19,33 @@ public class Client {
         this.udpSocket = datagramsocket;
         this.inetAddress = inetAddress;
     }
+    private void waitForPullRequest() throws IOException {
 
+        String msg;
+        byte[] buf = new byte[256];
+        DatagramPacket packet = new DatagramPacket(buf, buf.length);
+
+        // blocks until a packet is received
+        udpSocket.receive(packet);
+        msg = new String(packet.getData()).trim();
+        if(msg.equals("PULL")){
+            this.start();
+
+
+        }
+
+
+
+
+    }
     private void start()  {
         String name = System.getenv("SENSOR_NAME");
-
         String type = System.getenv("SENSOR_TYPE");
+        int sensID = Integer.parseInt(System.getenv("SENSOR_ID"));
+
+
         Scanner scanner = new Scanner(System.in);
-        Sensor sensor1 = new Sensor(1,name, type);
+        Sensor sensor1 = new Sensor(sensID,name, type);
         SensorData sensorData = new SensorData(sensor1);
 
 
@@ -40,7 +60,7 @@ public class Client {
                 DatagramPacket p = new DatagramPacket(buffer, buffer.length, inetAddress, 1234);
 
                 udpSocket.send(p);
-                TimeUnit.SECONDS.sleep(5);
+                TimeUnit.SECONDS.sleep(7);
             }
 
             catch(IOException e){
@@ -56,13 +76,13 @@ public class Client {
     public static void main(String[] args) throws NumberFormatException, IOException {
 
         String dest = System.getenv("DESTINATION");
-        DatagramSocket Socket = new DatagramSocket();
+        DatagramSocket Socket = new DatagramSocket(1235);
         InetAddress Address = InetAddress.getByName(dest) ; //InetAddress.getLocalHost()
 
         Client sender = new Client(Socket,Address);
         System.out.println("-- Running UDP Client at " + InetAddress.getLocalHost() + " --");
+        sender.waitForPullRequest();
 
-        sender.start();
     }
 }
 
