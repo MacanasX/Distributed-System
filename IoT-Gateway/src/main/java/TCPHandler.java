@@ -1,6 +1,4 @@
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -21,11 +19,17 @@ public class TCPHandler implements Runnable {
     public void run(){
         try {
             while(true) {
-                OutputStream output = this.getTCPsocket().getOutputStream();
+                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(TCPsocket.getOutputStream()));
+                out.write("Hello World");
+
+// zeilenumbruch senden
+                out.newLine();
+                out.flush();
+             /*   OutputStream output = this.getTCPsocket().getOutputStream();
                 byte[] data = this.readFromMessageBuffer().getBytes();
                 output.write(data);
                 PrintWriter writer = new PrintWriter(output, true);
-                writer.println(output);
+                writer.println(output); */
             }
         } catch (IOException e) {
             e.printStackTrace();

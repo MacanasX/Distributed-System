@@ -7,6 +7,8 @@ services:
       context: ./IoT-Gateway/
       dockerfile: Dockerfile
     container_name : IotGateway
+    depends_on:
+      - "HTTPserver"
     environment:
       NUMBERPORTS: "4"
       DESTINATIONTCP: "HTTPserver"
