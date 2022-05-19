@@ -11,6 +11,7 @@
     <modules>
         <module>Sensor</module>
         <module>IoT-Gateway</module>
+        <module>HTTP-Server</module>
     </modules>
 
     <properties>

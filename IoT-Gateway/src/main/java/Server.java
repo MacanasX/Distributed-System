@@ -1,14 +1,26 @@
 //package com.pgx.java.socket;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
 
 public class Server extends Thread {
-    private DatagramSocket udpSocket;
-    private int port;
-    private int threadname;
+    private final DatagramSocket udpSocket;
+    private final int port;
+    private final int threadname;
+    private ArrayList<String> messageBuffer;
+
+    public synchronized void writeIntoMessageBuffer(String message){
+
+        messageBuffer.add(message);
+
+    }
+
     public void run()
     {
         try {
@@ -20,40 +32,51 @@ public class Server extends Thread {
             e.printStackTrace();
         }
 
+
     }
     public Server(int port, DatagramSocket socket, int name) throws SocketException, IOException {
         this.port = port;
         this.udpSocket = socket;
         this.threadname = name;
+        this.messageBuffer = null;
+
+    }
+    public void setMessageBuffer(ArrayList<String> messageBuffer){
+
+        this.messageBuffer = messageBuffer;
+    }
+    private void printreceivedMessage(String msg)  {
+
+       String message = msg.replace("{","");
+       String message2 = message.replace("}","");
+      // message=message.substring(1,message.length()-1);
+        String[] messageSplit = message2.split(",");
+       //String a = ""gasg"";
+
+        for (String a:messageSplit
+             ) {
+          System.out.println(a);
+        }
+        System.out.println("\n");
+
+
     }
     private void  listen() throws Exception {
-        System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
-        String msg;
-
-       /* while(true) {
-            try {
 
 
-            }
-            catch(IOException e){
-                e.printStackTrace();
-                break;
-            }
-        }*/
         Threadlistening();
     }
     private synchronized void PullRequest() throws IOException, InterruptedException {
         String [] sensoren = {"sensor1","sensor2","sensor3","sensor4"};
         String pullMessage = "PULL";
         byte [] messageBuffer = pullMessage.getBytes();
-        InetAddress Address = InetAddress.getByName(sensoren[0]);
-        DatagramPacket p = new DatagramPacket(messageBuffer, messageBuffer.length, Address, 1235);
 
-        udpSocket.send(p);
-
-
-
-
+        for(int i = 0 ; i < 4; i++)
+        {
+            InetAddress Address = InetAddress.getByName(sensoren[i]);
+            DatagramPacket p = new DatagramPacket(messageBuffer, messageBuffer.length, Address, 1235);
+            udpSocket.send(p);
+        }
 
     }
     private synchronized void Threadlistening() throws IOException, InterruptedException {
@@ -65,27 +88,45 @@ public class Server extends Thread {
         udpSocket.receive(packet);
 
         msg = new String(packet.getData()).trim();
+        this.writeIntoMessageBuffer(msg);
+        System.out.println("Größe vom BUffer: " + messageBuffer.size());
 
-        System.out.println(
-              "Meine ID:" + this.threadname +  "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
+       // System.out.println(
+          //    "Meine ID:" + this.threadname +  "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
 
-
-        Thread.sleep(2000);
+        this.printreceivedMessage(msg);
+        Thread.sleep(3000);
     }
 
     public static void main(String[] args) throws Exception {
+        String address = System.getenv("DESTINATIONTCP");
         int portNumbers = Integer.parseInt(System.getenv("NUMBERPORTS"));
+
+        ArrayList<String> bufferforThreads = new ArrayList<>();
+
+        TCPHandler tcpClient = new TCPHandler(new Socket(address,53257));
+        tcpClient.setMessageBuffer(bufferforThreads);
+
+
+
+
         ArrayList<Server> Threadlist = new ArrayList<>();
         DatagramSocket socket= new DatagramSocket(1234);
+
+
+        System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
+
         for(int i = 0; i < portNumbers ; i++)
         {
             Server clientthreads = new Server(1234,socket,i);
+            clientthreads.setMessageBuffer(bufferforThreads);
             Threadlist.add(clientthreads);
         }
-        System.out.println("Größe der threadlist:" + Threadlist.size());
+
         for(int i = 0; i < Threadlist.size() ; i++)
         {
             Threadlist.get(i).start();
         }
+        tcpClient.run();
     }
 }

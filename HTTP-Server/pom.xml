@@ -2,23 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-<!--    <parent>-->
-<!--        <artifactId>VerteileSysteme_2022_Groß_Berneiser</artifactId>-->
-        <groupId>org.example</groupId>
-        <version>1.0-SNAPSHOT</version>
-    <dependencies>
-        <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
-    <!--    </parent>-->
+    <groupId>org.example</groupId>
+    <version>1.0-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>IoT-Gateway</artifactId>
+    <artifactId>HTTP-Server</artifactId>
 
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
     <build>
         <plugins>
             <plugin>
@@ -27,17 +20,12 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Server</mainClass>
+                            <mainClass>HTTPServer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-
-    <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
 
 </project>

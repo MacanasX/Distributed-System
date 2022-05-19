@@ -9,6 +9,7 @@ services:
     container_name : IotGateway
     environment:
       NUMBERPORTS: "4"
+      DESTINATIONTCP: "HTTPserver"
 
 
   sensor1:
@@ -61,6 +62,14 @@ services:
       SENSOR_NAME: "Dach"
       SENSOR_TYPE: "Wind"
       SENSOR_ID: "4"
+
+  HTTPserver:
+    image: groupe_b_9/httpserver:latest
+
+    build:
+      context: ./HTTP-Server/
+      dockerfile: Dockerfile
+    container_name: HTTP-Server
 
 
 
