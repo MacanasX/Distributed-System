@@ -13,11 +13,37 @@ public class TCPServer implements Runnable {
 
     }
 
-    public void listen() throws IOException {
+    public void listen() throws IOException, ClassNotFoundException {
         // lesen
-        BufferedReader in = new BufferedReader(new InputStreamReader(this.TCPsocket.getInputStream()));
-        String text = in.readLine();
-        System.out.println(text);
+
+     /*   ObjectInputStream ois = new ObjectInputStream(this.TCPsocket.getInputStream());
+        String message = (String) ois.readObject();
+        System.out.println(message);
+        */
+       // ObjectInputStream ois = new ObjectInputStream(this.TCPsocket.getInputStream());
+      //  String message = (String) ois.readObject();
+       // System.out.println("Message Received: " + message);
+
+        // Send a response information to the client application
+      //  ObjectOutputStream oos = new ObjectOutputStream(this.TCPsocket.getOutputStream());
+       // oos.writeObject("Hi...");
+
+       // ois.close();
+       // oos.close();
+        InputStream inputStream = this.TCPsocket.getInputStream();
+        // create a DataInputStream so we can read data from it.
+        DataInputStream dataInputStream = new DataInputStream(inputStream);
+
+        // read the message from the socket
+        String message = dataInputStream.readUTF();
+        System.out.println("Got a Message from a Client: ");
+        System.out.println(message);
+     //  BufferedReader in = new BufferedReader(new InputStreamReader(this.TCPsocket.getInputStream()));
+      // String text = in.readLine();
+
+        this.TCPsocket.close();
+
+
         // schreiben
      //   BufferedWriter out = new BufferedWriter(new OutputStreamWriter(TCPsocket.getOutputStream()));
       //  out.write(text.toUpperCase());
@@ -26,7 +52,7 @@ public class TCPServer implements Runnable {
 
         // aufräumen
        // out.close();
-        in.close();
+       // in.close();
 
 
       /*  String data = null;
@@ -62,7 +88,7 @@ public void run(){
 
     try {
         this.listen();
-    } catch (IOException e) {
+    } catch (IOException | ClassNotFoundException e) {
         e.printStackTrace();
     }
 

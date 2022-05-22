@@ -18,19 +18,36 @@ public class TCPHandler implements Runnable {
 
     public void run(){
         try {
-            while(true) {
-                BufferedWriter out = new BufferedWriter(new OutputStreamWriter(TCPsocket.getOutputStream()));
-                out.write("Hello World");
+
+
+            OutputStream outputStream = this.TCPsocket.getOutputStream();
+            // create a data output stream from the output stream so we can send data through it
+            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+            String TCPmessage="" ;
+           // System.out.println("Sending string to the ServerSocket");
+            for(int i = 0 ; i < this.messageBuffer.size(); i++) {
+
+                TCPmessage = TCPmessage + this.messageBuffer.get(i) + "\n";
+            }
+            this.messageBuffer.clear();
+            // write the message we want to send
+            dataOutputStream.writeUTF(TCPmessage);
+            dataOutputStream.flush(); // send the message
+            dataOutputStream.close(); // close the output stream when we're done
+
+               // ObjectOutputStream ois = new ObjectOutputStream(this.TCPsocket.getOutputStream());
+              //  BufferedWriter out = new BufferedWriter(new OutputStreamWriter(TCPsocket.getOutputStream()));
+                //out.writeUTF("Hello World");
 
 // zeilenumbruch senden
-                out.newLine();
-                out.flush();
+               // ois.newLine();
+               //ois.flush();
              /*   OutputStream output = this.getTCPsocket().getOutputStream();
                 byte[] data = this.readFromMessageBuffer().getBytes();
                 output.write(data);
                 PrintWriter writer = new PrintWriter(output, true);
                 writer.println(output); */
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

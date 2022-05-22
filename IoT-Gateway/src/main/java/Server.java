@@ -23,7 +23,19 @@ public class Server extends Thread {
 
     public void run()
     {
-        try {
+
+        while(messageBuffer.size() < 4){
+
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+       /* try {
             while(true) {
                 this.PullRequest();
                 this.listen();
@@ -31,7 +43,7 @@ public class Server extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        */
 
     }
     public Server(int port, DatagramSocket socket, int name) throws SocketException, IOException {
@@ -89,12 +101,13 @@ public class Server extends Thread {
 
         msg = new String(packet.getData()).trim();
         this.writeIntoMessageBuffer(msg);
+        this.printreceivedMessage(msg);
         System.out.println("Größe vom BUffer: " + messageBuffer.size());
 
        // System.out.println(
           //    "Meine ID:" + this.threadname +  "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
 
-        this.printreceivedMessage(msg);
+
         Thread.sleep(3000);
     }
 
@@ -104,17 +117,39 @@ public class Server extends Thread {
 
         ArrayList<String> bufferforThreads = new ArrayList<>();
 
-        TCPHandler tcpClient = new TCPHandler(new Socket(address,53257));
-        tcpClient.setMessageBuffer(bufferforThreads);
 
 
 
 
         ArrayList<Server> Threadlist = new ArrayList<>();
         DatagramSocket socket= new DatagramSocket(1234);
+        Server Server = new Server(1234,socket,4);
+
+        while(true){
+            byte[] buf = new byte[256];
+            Server.PullRequest();
+            DatagramPacket packet = new DatagramPacket(buf,buf.length);
+
+            socket.receive(packet);
+
+            UDPHandler thread =new UDPHandler(packet,bufferforThreads);
+            thread.run();
+            if((bufferforThreads.size() % 4) == 0)
+            {
+                TCPHandler tcpClient = new TCPHandler(new Socket(address,53257));
+                tcpClient.setMessageBuffer(bufferforThreads);
+                tcpClient.run();
+            }
 
 
-        System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
+
+
+
+
+        }
+
+
+       /* System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
 
         for(int i = 0; i < portNumbers ; i++)
         {
@@ -128,5 +163,8 @@ public class Server extends Thread {
             Threadlist.get(i).start();
         }
         tcpClient.run();
+
     }
-}
+    */
+
+} }

@@ -10,20 +10,23 @@ public class HTTPServer {
     public HTTPServer() throws IOException {
 
         this.server = new ServerSocket(53257);
+        this.server.setReuseAddress(true);
     }
 
     public static void main(String[] args) throws IOException {
         System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
         HTTPServer myserver = new HTTPServer();
-        Socket threadSocket;
+
+
        // TCPServer myTCPHandler = new TCPServer(new ServerSocket(53257));
 
   while(true) {
 
-    threadSocket = myserver.server.accept();
+      Socket client = myserver.server.accept();
 
-      TCPServer myTCPHandler = new TCPServer(threadSocket);
-      myTCPHandler.run();
+      TCPServer myTCPHandler = new TCPServer(client);
+      new Thread(myTCPHandler).start();
+     // myTCPHandler.run();
 
      //myTCPHandler.run();
 

@@ -20,6 +20,8 @@ services:
       context: ./Sensor/
       dockerfile: Dockerfile
     container_name: Sensor1
+    depends_on:
+      - "HTTPserver"
     environment:
        DESTINATION: "iot"
        SENSOR_NAME: "Heizung Wohnzimmer"
@@ -33,6 +35,8 @@ services:
      context: ./Sensor/
      dockerfile: Dockerfile
     container_name: Sensor2
+    depends_on:
+      - "HTTPserver"
     environment:
      DESTINATION: "iot"
      SENSOR_NAME: "Dachterrasse"
@@ -46,6 +50,8 @@ services:
       context: ./Sensor/
       dockerfile: Dockerfile
     container_name: Sensor3
+    depends_on:
+      - "HTTPserver"
     environment:
       DESTINATION: "iot"
       SENSOR_NAME: "Dachterrasse"
@@ -58,6 +64,8 @@ services:
     build:
       context: ./Sensor/
       dockerfile: Dockerfile
+    depends_on:
+        - "HTTPserver"
     container_name: Sensor4
     environment:
       DESTINATION: "iot"
