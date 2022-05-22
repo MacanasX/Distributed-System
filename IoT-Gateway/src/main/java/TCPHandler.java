@@ -27,7 +27,9 @@ public class TCPHandler implements Runnable {
            // System.out.println("Sending string to the ServerSocket");
             for(int i = 0 ; i < this.messageBuffer.size(); i++) {
 
-                TCPmessage = TCPmessage + this.messageBuffer.get(i) + "\n";
+                TCPmessage = TCPmessage + this.messageBuffer.get(i);
+                if(i < 3)
+                    TCPmessage = TCPmessage + "\n";
             }
             this.messageBuffer.clear();
             // write the message we want to send
