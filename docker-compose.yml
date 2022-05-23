@@ -39,7 +39,7 @@ services:
       - "HTTPserver"
     environment:
      DESTINATION: "iot"
-     SENSOR_NAME: "Dachterrasse"
+     SENSOR_NAME: "Balkon"
      SENSOR_TYPE: "Helligkeit"
      SENSOR_ID: "2"
 
@@ -54,7 +54,7 @@ services:
       - "HTTPserver"
     environment:
       DESTINATION: "iot"
-      SENSOR_NAME: "Dachterrasse"
+      SENSOR_NAME: "Garten"
       SENSOR_TYPE: "Niederschlag"
       SENSOR_ID: "3"
 

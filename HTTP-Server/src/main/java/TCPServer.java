@@ -8,8 +8,9 @@ public class TCPServer implements Runnable {
     private Socket TCPsocket;
 
 
-    TCPServer(Socket mySocket) throws IOException {
+    TCPServer(Socket mySocket, ArrayList<String> list) throws IOException {
     this.TCPsocket = mySocket;
+    this.receivedData = list;
 
     }
 
@@ -35,9 +36,12 @@ public class TCPServer implements Runnable {
         DataInputStream dataInputStream = new DataInputStream(inputStream);
 
         // read the message from the socket
+        String[] tmp_array;
         String message = dataInputStream.readUTF();
-        System.out.println("Got a Message from a Client: ");
+        System.out.println("Got a Message from: " + this.TCPsocket.getInetAddress() );
         System.out.println(message);
+        tmp_array = message.split(",");
+
      //  BufferedReader in = new BufferedReader(new InputStreamReader(this.TCPsocket.getInputStream()));
       // String text = in.readLine();
 

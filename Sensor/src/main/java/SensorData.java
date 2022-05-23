@@ -1,3 +1,7 @@
+import static java.lang.Math.round;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.json.simple.JSONObject;
 
 import java.sql.Timestamp;
@@ -7,7 +11,7 @@ public class SensorData {
 
     private double value;
     private String unit;
-    private Timestamp time;
+    private String time;
     private Sensor sensor;
     SensorData(Sensor sensor)
     {
@@ -36,11 +40,11 @@ public class SensorData {
     {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("timestamp", this.time);
-        jsonObject.put("name", sensor.getSensorName());
-        jsonObject.put("sensor_type", sensor.getType());
-        jsonObject.put("value", this.value);
-        jsonObject.put("id",sensor.getMyID());
         jsonObject.put("unit",this.unit);
+        jsonObject.put("value", this.value);
+        jsonObject.put("sensor_type", sensor.getType());
+        jsonObject.put("id",sensor.getMyID());
+        jsonObject.put("name", sensor.getSensorName());
 
 
         return jsonObject;
@@ -50,8 +54,11 @@ public class SensorData {
     public void  generateData()
     {
         Double value =(new Random().nextDouble() * (10 - 1)+ 1);
+        value = ((double)((int)(value *100.0)))/100.0;
         this.value = value;
-        this.time = new Timestamp(System.currentTimeMillis());
+        SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+        this.time = date.format(new Date());
+
         generateUnit();
 
 

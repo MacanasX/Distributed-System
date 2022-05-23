@@ -9,10 +9,12 @@ import org.json.simple.JSONObject;
 //import org.json.simple.parser.JSONParser;
 //import org.json.simple.parser.ParseException;
 
+
 public class Server extends Thread {
     private final DatagramSocket udpSocket;
     private final int port;
     private final int threadname;
+    public static Integer ALIVE_SENSOR ;
     private ArrayList<String> messageBuffer;
 
     public synchronized void writeIntoMessageBuffer(String message){
@@ -23,8 +25,24 @@ public class Server extends Thread {
 
     public void run()
     {
+            while(true) {
+                String [] sensoren = {"sensor1","sensor2","sensor3","sensor4"};
 
-        while(messageBuffer.size() < 4){
+                for(int i = 0 ; i < ALIVE_SENSOR;i ++ ) {
+                    try {
+                        InetAddress Address = InetAddress.getByName(sensoren[i]);
+                        String Hostname = Address.toString();
+                       // checkSensor(Hostname,1235);
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+
+
+            }
+       /* while(messageBuffer.size() < 4){
 
             try {
                 this.wait();
@@ -34,17 +52,7 @@ public class Server extends Thread {
 
 
         }
-
-       /* try {
-            while(true) {
-                this.PullRequest();
-                this.listen();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        */
-
+  */
     }
     public Server(int port, DatagramSocket socket, int name) throws SocketException, IOException {
         this.port = port;
@@ -52,11 +60,17 @@ public class Server extends Thread {
         this.threadname = name;
         this.messageBuffer = null;
 
+
     }
     public void setMessageBuffer(ArrayList<String> messageBuffer){
 
         this.messageBuffer = messageBuffer;
     }
+
+
+
+
+
     private void printreceivedMessage(String msg)  {
 
        String message = msg.replace("{","");
@@ -81,13 +95,23 @@ public class Server extends Thread {
     private synchronized void PullRequest() throws IOException, InterruptedException {
         String [] sensoren = {"sensor1","sensor2","sensor3","sensor4"};
         String pullMessage = "PULL";
+        checkSensor check = new checkSensor();
+        new Thread(check).start();
+        this.wait(4000);
         byte [] messageBuffer = pullMessage.getBytes();
 
         for(int i = 0 ; i < 4; i++)
-        {
-            InetAddress Address = InetAddress.getByName(sensoren[i]);
-            DatagramPacket p = new DatagramPacket(messageBuffer, messageBuffer.length, Address, 1235);
-            udpSocket.send(p);
+        {   try {
+            //if (checkSensor.isAlive.get(i)) {
+                InetAddress Address = InetAddress.getByName(sensoren[i]);
+                DatagramPacket p = new DatagramPacket(messageBuffer, messageBuffer.length, Address,
+                    1235);
+                udpSocket.send(p);
+            //}
+        }
+        catch (ArrayIndexOutOfBoundsException | UnknownHostException e) {
+            e.printStackTrace();
+        }
         }
 
     }
@@ -102,19 +126,20 @@ public class Server extends Thread {
         msg = new String(packet.getData()).trim();
         this.writeIntoMessageBuffer(msg);
         this.printreceivedMessage(msg);
-        System.out.println("Größe vom BUffer: " + messageBuffer.size());
+      //  System.out.println("Größe vom BUffer: " + messageBuffer.size());
 
        // System.out.println(
           //    "Meine ID:" + this.threadname +  "Message from " + packet.getAddress().getHostAddress() + ": " + msg);
 
 
-        Thread.sleep(3000);
+        Thread.sleep(5000);
     }
 
     public static void main(String[] args) throws Exception {
         String address = System.getenv("DESTINATIONTCP");
-        int portNumbers = Integer.parseInt(System.getenv("NUMBERPORTS"));
-
+        int sensoren =Integer.parseInt(System.getenv("NUMBERPORTS"));;
+        ALIVE_SENSOR = Integer.parseInt(System.getenv("NUMBERPORTS"));
+        System.out.println("Sensoren am leben: " + ALIVE_SENSOR);
         ArrayList<String> bufferforThreads = new ArrayList<>();
 
 
@@ -125,9 +150,16 @@ public class Server extends Thread {
         DatagramSocket socket= new DatagramSocket(1234);
         Server Server = new Server(1234,socket,4);
 
+
+
         while(true){
-            byte[] buf = new byte[256];
+            checkSensor.isAlive.clear();
+            System.out.println("Sensoren am leben2 : " + ALIVE_SENSOR);
+           // TimeUnit.SECONDS.sleep(2);
+
             Server.PullRequest();
+            byte[] buf = new byte[256];
+
             DatagramPacket packet = new DatagramPacket(buf,buf.length);
 
             socket.receive(packet);
@@ -140,9 +172,6 @@ public class Server extends Thread {
                 tcpClient.setMessageBuffer(bufferforThreads);
                 tcpClient.run();
             }
-
-
-
 
 
 

@@ -29,7 +29,7 @@ public class Client {
         udpSocket.receive(packet);
         msg = new String(packet.getData()).trim();
         if(msg.equals("PULL")){
-            this.start();
+           this.start();
 
 
         }
@@ -81,7 +81,21 @@ public class Client {
 
         Client sender = new Client(Socket,Address);
         System.out.println("-- Running UDP Client at " + InetAddress.getLocalHost() + " --");
-        sender.waitForPullRequest();
+        while(true){
+            byte[] buf = new byte[256];
+
+            DatagramPacket packet = new DatagramPacket(buf,buf.length);
+
+            Socket.receive(packet);
+            UDPThread thread =new UDPThread(packet, Socket);
+            new Thread(thread).start();
+
+           // sender.waitForPullRequest();
+
+
+        }
+
+
 
     }
 }
