@@ -20,7 +20,7 @@ public class UDPThread implements Runnable {
 
     if(message.equals("PULL"))
     {
-
+      System.out.println("PULL angekommen!");
       int sensID = Integer.parseInt(System.getenv("SENSOR_ID"));
       String type = System.getenv("SENSOR_TYPE");
       String name = System.getenv("SENSOR_NAME");

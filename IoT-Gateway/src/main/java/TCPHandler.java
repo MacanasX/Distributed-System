@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TCPHandler extends Thread {
 
@@ -11,7 +12,8 @@ public class TCPHandler extends Thread {
 
 
 
-    TCPHandler(Socket mySocket, SharedBuffer myBuffer){
+
+  TCPHandler(Socket mySocket, SharedBuffer myBuffer){
 
         this.TCPsocket = mySocket;
         this.myBuffer = myBuffer;
@@ -20,33 +22,38 @@ public class TCPHandler extends Thread {
     }
 
     public void run(){
-        try {
+
+            try {
+            OutputStream outputStream = this.TCPsocket.getOutputStream();
+            // create a data output stream from the output stream so we can send data through it
+            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+            String TCPmessage = "";
+            // System.out.println("Sending string to the ServerSocket");
+
+            // if (TCPHandler.messageBuffer.size() != 0) {
+            while (myBuffer.getBufferSize() > 0) {
+
+              TCPmessage = TCPmessage + myBuffer.get();
+              if (myBuffer.getBufferSize() > 0)
+                TCPmessage = TCPmessage + "," + "\n";
 
 
-              OutputStream outputStream = this.TCPsocket.getOutputStream();
-              // create a data output stream from the output stream so we can send data through it
-              DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-              String TCPmessage = "";
-              // System.out.println("Sending string to the ServerSocket");
+            }
+            myBuffer.clearBuffer();
+            System.out.println("BUffer is leer: " + myBuffer.isEmpty());
 
-             // if (TCPHandler.messageBuffer.size() != 0) {
-               while(myBuffer.getBufferSize() > 0) {
+            HTTPRequest myrequest = new HTTPRequest();
+            TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
+            dataOutputStream.writeUTF(TCPmessage);
+            dataOutputStream.flush(); // send the message
+            dataOutputStream.close();
 
-                  TCPmessage = TCPmessage + myBuffer.get();
-                  if (myBuffer.getBufferSize() > 0)
-                  TCPmessage = TCPmessage + "," + "\n";
-
-
-          }
-          dataOutputStream.writeUTF(TCPmessage);
-          dataOutputStream.flush(); // send the message
-          dataOutputStream.close();
-
-        } catch (IOException e) {
+          } catch(IOException e){
             e.printStackTrace();
-        }
+          }
 
     }
+
     public Socket getTCPsocket(){
 
         return TCPsocket;

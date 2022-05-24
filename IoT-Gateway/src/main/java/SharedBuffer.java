@@ -3,10 +3,14 @@ import java.util.ArrayList;
 public class SharedBuffer {
 
 
-  private boolean available = false;
-  private ArrayList<String> data = new ArrayList<>();
+  public volatile boolean available = false;
+  private ArrayList<String> data ;
   private int bufferSize = 0;
-
+  private int maxBufferSize= checkSensor.sensors.size();
+  SharedBuffer()
+  {
+    this.data = new ArrayList<>();
+  }
   public synchronized void put(String x) {
     while(available) {
       try {
@@ -16,7 +20,9 @@ public class SharedBuffer {
     }
     data.add(x);
     bufferSize++;
-    if(bufferSize == 4) {
+    System.out.println("Sharebuffer intern: " + checkSensor.sensors.size());
+    maxBufferSize = checkSensor.sensors.size();
+    if(bufferSize == maxBufferSize) {
       available = true;
       notifyAll();
     }
@@ -35,6 +41,7 @@ public class SharedBuffer {
     data.remove(bufferSize-1);
     bufferSize--;
     if(bufferSize == 0) {
+      data.clear();
       available = false;
       notifyAll();
     }
@@ -43,10 +50,19 @@ public class SharedBuffer {
   }
 
 
-  public int getBufferSize()
+  public  int getBufferSize()
   {
 
     return data.size();
   }
+  public  void clearBuffer(){
+      data.clear();
 
-}
+  }
+  public boolean isEmpty(){
+
+    return data.isEmpty();
+  }
+
+  }
+
