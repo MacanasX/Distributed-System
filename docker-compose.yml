@@ -80,7 +80,8 @@ services:
       context: ./HTTP-Server/
       dockerfile: Dockerfile
     container_name: HTTP-Server
-
+    environment:
+       DESTINATIONTCP: "iot"
 
 
 

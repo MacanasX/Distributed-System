@@ -24,9 +24,9 @@ public class TCPHandler extends Thread {
     public void run(){
 
             try {
-            OutputStream outputStream = this.TCPsocket.getOutputStream();
-            // create a data output stream from the output stream so we can send data through it
-            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+              OutputStream outputStream = this.TCPsocket.getOutputStream();
+              // create a data output stream from the output stream so we can send data through it
+              DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
             String TCPmessage = "";
             // System.out.println("Sending string to the ServerSocket");
 
@@ -39,15 +39,16 @@ public class TCPHandler extends Thread {
 
 
             }
+
             myBuffer.clearBuffer();
-            System.out.println("BUffer is leer: " + myBuffer.isEmpty());
+
 
             HTTPRequest myrequest = new HTTPRequest();
             TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
             dataOutputStream.writeUTF(TCPmessage);
             dataOutputStream.flush(); // send the message
             dataOutputStream.close();
-
+            this.TCPsocket.close();
           } catch(IOException e){
             e.printStackTrace();
           }

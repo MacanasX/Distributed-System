@@ -20,7 +20,6 @@ public class SharedBuffer {
     }
     data.add(x);
     bufferSize++;
-    System.out.println("Sharebuffer intern: " + checkSensor.sensors.size());
     maxBufferSize = checkSensor.sensors.size();
     if(bufferSize == maxBufferSize) {
       available = true;

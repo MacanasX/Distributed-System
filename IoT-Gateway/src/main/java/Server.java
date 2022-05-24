@@ -20,6 +20,7 @@ public class Server extends Thread {
     public static Integer PORT = 1234;
     private SharedBuffer buffer = null;
 
+
     public synchronized void writeIntoMessageBuffer(String message) {
 
        // messageBuffer.add(message);
@@ -29,21 +30,17 @@ public class Server extends Thread {
     public void run() {
         while (true) {
 
-                while (!buffer.isEmpty()) {
-                    try {
-                        wait();
-                    } catch (InterruptedException e) {
-                    }
-
-                }
-                try {
-                    PullRequest();
-                } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-
+            byte[] buf = new byte[256];
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
+            try {
+                this.udpSocket.receive(packet);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            UDPHandler thread = new UDPHandler(packet, this.buffer);
+            thread.start();
         }
+    }
 
 
 
@@ -65,6 +62,7 @@ public class Server extends Thread {
         this.udpSocket = socket;
         this.threadname = name;
         this.buffer = buffer;
+
 
 
     }
@@ -101,8 +99,8 @@ public class Server extends Thread {
         String[] sensoren = {"sensor1", "sensor2", "sensor3", "sensor4"};
         String pullMessage = "PULL";
         System.out.println("AUFGERUFEN!" +  checkSensor.sensors.size());
-        //TimeUnit.SECONDS.sleep(2);
-        // server.sleep(5000);
+        //TimeUnit.SECONDS.sleep(4);
+        Thread.sleep(5000);
         byte[] messageBuffer = pullMessage.getBytes();
 
         for (int i = 0; i < checkSensor.sensors.size(); i++) {
@@ -159,35 +157,35 @@ public class Server extends Thread {
 
         SharedBuffer ourBuffer = new SharedBuffer();
         checkSensor check = new checkSensor();
+        TCPresponse serverSocket = new TCPresponse();
+        serverSocket.start();
         new Thread(check).start();
         Server server = new Server(1234, socket, 4,ourBuffer);
         PullThread pullrequest = new PullThread(socket,ourBuffer);
         new Thread(pullrequest).start();
+
        // pullrequest.PullRequest();
-       // server.PullRequest();
-       // server.start();
+       //
+        //server.start();
         while (true) {
 
+           // server.PullRequest();
+            byte[] buf = new byte[256];
+            DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
-            checkSensor.isAlive.clear();
+            socket.receive(packet);
+
+            UDPHandler thread = new UDPHandler(packet, ourBuffer);
+            thread.start();
+
+          //  checkSensor.isAlive.clear();
             //tem.out.println("Sensoren am leben2 : " + ALIVE_SENSOR);
            // new Thread(pullrequest).start();
-            System.out.println("Buffer is empty vor if " +ourBuffer.isEmpty());
 
                // server.PullRequest();
 
            // check.join();
-            System.out.println("Buffer is empty nach if " +ourBuffer.isEmpty());
 
-
-
-                byte[] buf = new byte[256];
-
-                DatagramPacket packet = new DatagramPacket(buf, buf.length);
-
-                socket.receive(packet);
-                UDPHandler thread = new UDPHandler(packet, ourBuffer);
-                thread.start();
 
            // thread.join();
             // Server.join(500);
@@ -195,7 +193,7 @@ public class Server extends Thread {
               //  System.out.println("Sensoren Aktiv: "+ checkSensor.sensors.size());
               //  System.out.println("ShareBuffer größe: " + ourBuffer.getBufferSize());
 
-            if(ourBuffer.getBufferSize() == checkSensor.sensors.size()) {
+            if(ourBuffer.getBufferSize() == 4) {
                 TCPHandler Client = new TCPHandler(new Socket(address, 53257),ourBuffer);
                 Client.start();
             }
@@ -205,22 +203,4 @@ public class Server extends Thread {
     }
 }
 
-
-       /* System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
-
-        for(int i = 0; i < portNumbers ; i++)
-        {
-            Server clientthreads = new Server(1234,socket,i);
-            clientthreads.setMessageBuffer(bufferforThreads);
-            Threadlist.add(clientthreads);
-        }
-
-        for(int i = 0; i < Threadlist.size() ; i++)
-        {
-            Threadlist.get(i).start();
-        }
-        tcpClient.run();
-
-    }
-    */
 

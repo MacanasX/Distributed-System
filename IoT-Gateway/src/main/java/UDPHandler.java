@@ -28,9 +28,9 @@ public class UDPHandler extends Thread   {
 
       myBuffer.put(message);
       // this.writeIntoMessageBuffer(message);
-      System.out.println("Got a Message from " + udpPacket.getAddress());
-      System.out.println(
-          new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(message)));
+    //  System.out.println("Got a Message from " + udpPacket.getAddress());
+    // System.out.println(
+     //     new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(message)));
 
       // this.printMessage(message);
     }

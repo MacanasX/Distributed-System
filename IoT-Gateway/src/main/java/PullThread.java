@@ -31,8 +31,8 @@ public class PullThread implements Runnable {
   public void run() {
     while (true) {
       try {
-        Thread.sleep(4000);
-        this.PullRequest();
+
+        PullRequest();
       } catch (IOException | InterruptedException e) {
         e.printStackTrace();
       }
@@ -44,6 +44,7 @@ public class PullThread implements Runnable {
   public void PullRequest() throws IOException, InterruptedException {
     String[] sensoren = {"sensor1", "sensor2", "sensor3", "sensor4"};
     String pullMessage = "PULL";
+    Thread.sleep(4000);
     //TimeUnit.SECONDS.sleep(2);
     // Thread.sleep(3500);
 
