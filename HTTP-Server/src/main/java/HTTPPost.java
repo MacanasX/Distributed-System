@@ -12,11 +12,10 @@ public class HTTPPost {
       java.util.Date date = new java.util.Date();
 
       httpHeaderResponse = "HTTP/1.1 200 OK /" + "\n" + "Date: " + date + "\n" +
-          "Server: " + "HTTPServer" + "\n" + "    " + "\n" + "Accept:  application/json" + "\n" +
+          "Server: " + "HTTPServer" +  "    " + "\n" +  "Accept:  application/json" + "\n" +
           "Accept-Language: en-US,en;q=0.5" + "\n" + "Accept-Encoding:  " + "\n" +
           "Connection: keep-alive" + "\n" + "Content-Type: application/json; charset=utf-8" + "\n"
-          +
-          tmp[9] + "\n" + "\n";
+          + tmp[8];
 
 
     } else {
@@ -26,7 +25,7 @@ public class HTTPPost {
           "Accept-Language: en-US,en;q=0.5" + "\n" + "Accept-Encoding:  " + "\n" +
           "Connection: keep-alive" + "\n" + "Content-Type: application/json; charset=utf-8" + "\n"
           +
-          tmp[9] + "\n" + "\n";
+          tmp[8];
 
 
     }

@@ -9,12 +9,7 @@ public class HTTPRequest {
         "Connection: keep-alive" + "\n" +"Content-Type: application/json; charset=utf-8" +"\n" +
         "Content-Length:  "+ message.length() + "\n" + "\n" + message;
 
-
-
     return header;
-
-
-
 
   }
 

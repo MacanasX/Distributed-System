@@ -23,12 +23,10 @@ public static ArrayList<String> sensors = new ArrayList<>();
           try {
 
             InetAddress Address = InetAddress.getByName(sensors.get(i));
-
-            isAlive.add(checkSensor(Address, 1235));
+            isAlive.add(check(Address, 1235));
 
           } catch (UnknownHostException | SocketException e) {
             System.out.println(sensors.get(i) + " ist nicht mehr erreichbar!");
-
             sensors.remove(i);
           }
 
@@ -40,33 +38,18 @@ public static ArrayList<String> sensors = new ArrayList<>();
 
 
 
-  private boolean checkSensor(InetAddress Address, int port) throws SocketException {
+  private boolean check(InetAddress Address, int port) throws SocketException {
 
     boolean isAlive = false;
 
     // Creates a socket address from a hostname and a port number
     SocketAddress socketAddress = new InetSocketAddress(Address, port);
     DatagramSocket socket = new DatagramSocket(1238);
-
-    // Timeout required - it's in milliseconds
-    int timeout = 2000;
-
-   // log("hostName: " + Address + ", port: " + port);
-
     socket.connect(Address,1235);
-   // System.out.println("Sensor " + Address + " is alive!");
     socket.close();
     isAlive = true;
-
     return isAlive;
   }
 
-  private static void log(String string) {
-    System.out.println(string);
-  }
 
-  // Simple log utility returns boolean result
-  private static void log(boolean isAlive) {
-    System.out.println("isAlive result: " + isAlive + "\n");
-  }
 }

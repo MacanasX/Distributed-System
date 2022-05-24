@@ -19,7 +19,7 @@ public class HTTPServer {
         HTTPServer myserver = new HTTPServer();
 
 
-       // TCPServer myTCPHandler = new TCPServer(new ServerSocket(53257));
+
 
   while(true) {
 
@@ -27,9 +27,7 @@ public class HTTPServer {
 
       TCPServer myTCPHandler = new TCPServer(client);
       new Thread(myTCPHandler).start();
-     // myTCPHandler.run();
 
-     //myTCPHandler.run();
 
 
   }

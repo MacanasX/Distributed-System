@@ -21,34 +21,25 @@ public class TCPServer implements Runnable {
 
         DataInputStream dataInputStream = new DataInputStream(inputStream);
 
-        // read the message from the socket
-        String[] tmp_array;
+
+
         String message = dataInputStream.readUTF();
-       System.out.println("Got a Message from: " + this.TCPsocket.getInetAddress() );
-       System.out.println(message);
-        HTTPPost bla = new HTTPPost();
-        response=bla.checkHtppMessage(message);
-        PrintStream output = new PrintStream(TCPsocket.getOutputStream());
-        output.println(response);
+        System.out.println("Got a Message from: " + this.TCPsocket.getInetAddress() );
+        System.out.println(message);
+        HTTPPost header = new HTTPPost();
+        response=header.checkHtppMessage(message);
+       // PrintStream output = new PrintStream(TCPsocket.getOutputStream());
+       // output.println(response);
 
-        Socket dest = new Socket(destination, 53257);
-       // this.TCPsocket.
+       Socket dest = new Socket(destination, 53257);
+
         OutputStream outputStream = dest.getOutputStream();
-        // create a data output stream from the output stream so we can send data through it
+         //create a data output stream from the output stream so we can send data through it
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-       // tmp_array = message.split(",");
+
         dataOutputStream.writeUTF(response);
-       dataOutputStream.flush(); // send the message
+        dataOutputStream.flush();
         dataOutputStream.close();
-        this.TCPsocket.close();
-        dest.close();
-        //HTTPServer.myReceivedMessages.add(tmp_array);
-
-
-
-
-
-
 
     }
 

@@ -35,8 +35,6 @@ public class Client {
         }
 
 
-
-
     }
     private void start()  {
         String name = System.getenv("SENSOR_NAME");

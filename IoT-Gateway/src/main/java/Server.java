@@ -21,11 +21,7 @@ public class Server extends Thread {
     private SharedBuffer buffer = null;
 
 
-    public synchronized void writeIntoMessageBuffer(String message) {
 
-       // messageBuffer.add(message);
-
-    }
 
     public void run() {
         while (true) {
@@ -37,24 +33,11 @@ public class Server extends Thread {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            UDPHandler thread = new UDPHandler(packet, this.buffer);
-            thread.start();
+           // UDPHandler thread = new UDPHandler( his.buffer);
+           // thread.start();
         }
     }
 
-
-
-       /* while(messageBuffer.size() < 4){
-
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-  */
 
 
     public Server(int port, DatagramSocket socket, int name, SharedBuffer buffer) throws SocketException, IOException {
@@ -67,12 +50,8 @@ public class Server extends Thread {
 
     }
 
-    public void setMessageBuffer(ArrayList<String> messageBuffer) {
 
-       // this.messageBuffer = messageBuffer;
-    }
-
-
+/*
     private void printreceivedMessage(String msg) {
 
         String message = msg.replace("{", "");
@@ -89,12 +68,9 @@ public class Server extends Thread {
 
 
     }
+*/
 
-    private void listen() throws Exception {
-
-        Threadlistening();
-    }
-
+/*
     public void PullRequest() throws IOException, InterruptedException {
         String[] sensoren = {"sensor1", "sensor2", "sensor3", "sensor4"};
         String pullMessage = "PULL";
@@ -119,8 +95,8 @@ public class Server extends Thread {
         }
 
     }
-
-    private synchronized void Threadlistening() throws IOException, InterruptedException {
+*/
+   /* private synchronized void Threadlistening() throws IOException, InterruptedException {
         String msg;
         byte[] buf = new byte[256];
         DatagramPacket packet = new DatagramPacket(buf, buf.length);
@@ -138,62 +114,44 @@ public class Server extends Thread {
 
         Thread.sleep(5000);
     }
-
+        */
     public static void main(String[] args) throws Exception {
         String address = System.getenv("DESTINATIONTCP");
-        int sensoren = Integer.parseInt(System.getenv("NUMBERPORTS"));
-        ;
         ALIVE_SENSOR = Integer.parseInt(System.getenv("NUMBERPORTS"));
         ADDRESS = InetAddress.getByName("iot").toString();
-        ArrayList<String> bufferforThreads = new ArrayList<>();
+
         checkSensor.sensors.add("sensor1");
         checkSensor.sensors.add("sensor2");
         checkSensor.sensors.add("sensor3");
         checkSensor.sensors.add("sensor4");
-        String useragent = System.getenv("USER-AGENT");
-
-        ArrayList<Server> Threadlist = new ArrayList<>();
+        //UDP SOCKET
         DatagramSocket socket = new DatagramSocket(1234);
-
+        //SHAREDBUFFER FOR THREADS
         SharedBuffer ourBuffer = new SharedBuffer();
+        //CHECK SENSORS ALIVE
         checkSensor check = new checkSensor();
+        //GET HTTP POST RESPONSE
         TCPresponse serverSocket = new TCPresponse();
+        Server server = new Server(1234, socket, 4,ourBuffer);
+        //GET SENSORS DATA
+        PullThread pullrequest = new PullThread(socket,ourBuffer);
+
         serverSocket.start();
         new Thread(check).start();
-        Server server = new Server(1234, socket, 4,ourBuffer);
-        PullThread pullrequest = new PullThread(socket,ourBuffer);
         new Thread(pullrequest).start();
 
-       // pullrequest.PullRequest();
-       //
-        //server.start();
+
         while (true) {
 
-           // server.PullRequest();
             byte[] buf = new byte[256];
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
             socket.receive(packet);
-
-            UDPHandler thread = new UDPHandler(packet, ourBuffer);
+            UDPHandler thread = new UDPHandler(packet,ourBuffer);
             thread.start();
 
-          //  checkSensor.isAlive.clear();
-            //tem.out.println("Sensoren am leben2 : " + ALIVE_SENSOR);
-           // new Thread(pullrequest).start();
-
-               // server.PullRequest();
-
-           // check.join();
-
-
-           // thread.join();
-            // Server.join(500);
-            // System.out.println("Größe vom shared Buffer: " + bufferforThreads.size());
-              //  System.out.println("Sensoren Aktiv: "+ checkSensor.sensors.size());
-              //  System.out.println("ShareBuffer größe: " + ourBuffer.getBufferSize());
-
             if(ourBuffer.getBufferSize() == 4) {
+                //SEND DATA TO HTTP SERVER - > TCP
                 TCPHandler Client = new TCPHandler(new Socket(address, 53257),ourBuffer);
                 Client.start();
             }

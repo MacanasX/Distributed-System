@@ -6,7 +6,8 @@ public class SharedBuffer {
   public volatile boolean available = false;
   private ArrayList<String> data ;
   private int bufferSize = 0;
-  private int maxBufferSize= checkSensor.sensors.size();
+  private int maxBufferSize= 4;
+
   SharedBuffer()
   {
     this.data = new ArrayList<>();
@@ -39,8 +40,8 @@ public class SharedBuffer {
     String tmp = data.get(bufferSize-1);
     data.remove(bufferSize-1);
     bufferSize--;
-    if(bufferSize == 0) {
-      data.clear();
+    if(data.isEmpty()) {
+      //data.clear();
       available = false;
       notifyAll();
     }

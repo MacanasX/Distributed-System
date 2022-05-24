@@ -8,6 +8,7 @@ public class UDPThread implements Runnable {
 
   DatagramPacket udpPacket=null;
   DatagramSocket Socket=null;
+
   UDPThread(DatagramPacket packet, DatagramSocket Socket){
     this.udpPacket = packet;
     this.Socket =  Socket;
@@ -26,15 +27,11 @@ public class UDPThread implements Runnable {
       String name = System.getenv("SENSOR_NAME");
 
 
-
-
-      //Scanner scanner = new Scanner(System.in);
       Sensor sensor1 = new Sensor(sensID,name, type);
       SensorData sensorData = new SensorData(sensor1);
 
 
         try {
-
           sensorData.generateData();
           String message2 =sensorData.serializeToJSON().toString();
 
@@ -43,16 +40,14 @@ public class UDPThread implements Runnable {
           DatagramPacket p = new DatagramPacket(buffer, buffer.length, this.udpPacket.getAddress(), 1234);
 
           this.Socket.send(p);
-         // TimeUnit.SECONDS.sleep(7);
+
         }
 
         catch(IOException e){
           e.printStackTrace();
 
         }
-       // catch (InterruptedException k){
-        //  k.printStackTrace();
-        //  break;
+
         }
       }
 

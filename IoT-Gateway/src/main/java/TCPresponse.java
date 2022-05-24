@@ -36,7 +36,7 @@ public class TCPresponse extends Thread {
       }
 
       DataInputStream dataInputStream = new DataInputStream(inputStream);
-      // read the message from the socket
+
       String message = null;
       try {
         message = dataInputStream.readUTF();
