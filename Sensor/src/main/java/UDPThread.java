@@ -17,7 +17,7 @@ public class UDPThread implements Runnable {
   public void run(){
 
     String message = new String(this.udpPacket.getData()).trim();
-  System.out.println(message);
+
     if(message.equals("PULL"))
     {
 
@@ -32,7 +32,7 @@ public class UDPThread implements Runnable {
       Sensor sensor1 = new Sensor(sensID,name, type);
       SensorData sensorData = new SensorData(sensor1);
 
-      while (true) {
+
         try {
 
           sensorData.generateData();
@@ -43,21 +43,21 @@ public class UDPThread implements Runnable {
           DatagramPacket p = new DatagramPacket(buffer, buffer.length, this.udpPacket.getAddress(), 1234);
 
           this.Socket.send(p);
-          TimeUnit.SECONDS.sleep(7);
+         // TimeUnit.SECONDS.sleep(7);
         }
 
         catch(IOException e){
           e.printStackTrace();
-          break;
+
         }
-        catch (InterruptedException k){
-          k.printStackTrace();
-          break;
+       // catch (InterruptedException k){
+        //  k.printStackTrace();
+        //  break;
         }
       }
 
     }
 
-  }
 
-}
+
+

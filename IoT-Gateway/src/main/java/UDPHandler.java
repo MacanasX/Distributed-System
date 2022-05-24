@@ -3,35 +3,41 @@ import java.net.Socket;
 import java.util.ArrayList;
 import com.google.gson.*;
 
-public class UDPHandler implements Runnable {
+public class UDPHandler extends Thread   {
 
   //Socket udpSocket=null;
   DatagramPacket udpPacket=null;
   private ArrayList<String> messageBuffer;
+  private SharedBuffer myBuffer = null;
 
-
-  UDPHandler(DatagramPacket packet, ArrayList<String> Buffer){
+  UDPHandler(DatagramPacket packet,SharedBuffer myBuffer){
 
     //this.udpSocket=socket;
     this.udpPacket=packet;
-    this.messageBuffer = Buffer;
+    this.myBuffer = myBuffer;
   }
 
 
   public void run() {
 
-    String message = new String(udpPacket.getData()).trim();
-    this.writeIntoMessageBuffer(message);
-    System.out.println("Got a Message from " + udpPacket.getAddress());
-    System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(message)));
-   // this.printMessage(message);
+
+
+        String message = new String(udpPacket.getData()).trim();
+        myBuffer.put(message);
+       // this.writeIntoMessageBuffer(message);
+        System.out.println("Got a Message from " + udpPacket.getAddress());
+        System.out.println(
+            new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(message)));
+        // this.printMessage(message);
+
+      }
 
 
 
-  }
+
   public synchronized void writeIntoMessageBuffer(String message){
 
-    messageBuffer.add(message);
+    TCPHandler.messageBuffer.add(message);
 
   }
 

@@ -5,13 +5,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 public class HTTPServer {
-    private ArrayList<String>myReceivedMessages;
+    public static ArrayList<String[]>myReceivedMessages = new ArrayList<>();
     private ServerSocket server;
     public HTTPServer() throws IOException {
 
         this.server = new ServerSocket(53257);
         this.server.setReuseAddress(true);
-        this.myReceivedMessages = new ArrayList<>();
+
     }
 
     public static void main(String[] args) throws IOException {
@@ -25,7 +25,7 @@ public class HTTPServer {
 
       Socket client = myserver.server.accept();
 
-      TCPServer myTCPHandler = new TCPServer(client,myserver.myReceivedMessages);
+      TCPServer myTCPHandler = new TCPServer(client);
       new Thread(myTCPHandler).start();
      // myTCPHandler.run();
 
