@@ -147,9 +147,12 @@ public class Server extends Thread {
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
             socket.receive(packet);
-            UDPHandler thread = new UDPHandler(packet,ourBuffer);
-            thread.start();
+            String message = new String(packet.getData()).trim();
 
+            ourBuffer.put(message);
+         //   UDPHandler thread = new UDPHandler(packet,ourBuffer);
+           // thread.start();
+            System.out.println("Buffergröße: " + ourBuffer.getBufferSize());
             if(ourBuffer.getBufferSize() == 4) {
                 //SEND DATA TO HTTP SERVER - > TCP
                 TCPHandler Client = new TCPHandler(new Socket(address, 53257),ourBuffer);

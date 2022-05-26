@@ -12,6 +12,7 @@ public class SharedBuffer {
   {
     this.data = new ArrayList<>();
   }
+
   public synchronized void put(String x) {
     while(available) {
       try {
