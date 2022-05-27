@@ -6,7 +6,7 @@ public class SharedBuffer {
   public volatile boolean available = false;
   private ArrayList<String> data ;
   private int bufferSize = 0;
-  private int maxBufferSize= 4;
+  private int  maxBufferSize= 4;
 
   SharedBuffer()
   {
@@ -20,9 +20,10 @@ public class SharedBuffer {
       }
       catch(InterruptedException e) {}
     }
+    maxBufferSize = Server.ALIVE_SENSOR;
     data.add(x);
     bufferSize++;
-    maxBufferSize = checkSensor.sensors.size();
+
     if(bufferSize == maxBufferSize) {
       available = true;
       notifyAll();
@@ -64,6 +65,9 @@ public class SharedBuffer {
 
     return data.isEmpty();
   }
+  public void setMaxBufferSize(int size ){
 
+    this.maxBufferSize = size;
+  }
   }
 

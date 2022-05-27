@@ -17,8 +17,8 @@ public class TCPServer implements Runnable {
     public void listen() throws IOException, ClassNotFoundException {
         String destination = System.getenv("DESTINATIONTCP");
         String response;
-        InputStream inputStream = this.TCPsocket.getInputStream();
 
+        InputStream inputStream = this.TCPsocket.getInputStream();
         DataInputStream dataInputStream = new DataInputStream(inputStream);
 
 

@@ -10,7 +10,7 @@ services:
     depends_on:
       - "HTTPserver"
     environment:
-      NUMBERPORTS: "4"
+      NUMBEROFSENSORS: "4"
       DESTINATIONTCP: "HTTPserver"
 
 

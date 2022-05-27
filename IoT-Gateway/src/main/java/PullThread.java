@@ -44,27 +44,30 @@ public class PullThread implements Runnable {
   public void PullRequest() throws IOException, InterruptedException {
     String[] sensoren = {"sensor1", "sensor2", "sensor3", "sensor4"};
     String pullMessage = "PULL";
-    Thread.sleep(5000);
+    Thread.sleep(4000);
     //TimeUnit.SECONDS.sleep(2);
     // Thread.sleep(3500);
 
     byte[] messageBuffer = pullMessage.getBytes();
 
-    for (int i = 0; i < checkSensor.sensors.size(); i++) {
-      try {
-        //if (checkSensor.isAlive.get(i)) {
-        InetAddress Address = InetAddress.getByName(checkSensor.sensors.get(i));
-        DatagramPacket p = new DatagramPacket(messageBuffer, messageBuffer.length, Address,
-            1235);
-        udpSocket.send(p);
-        // }
-      } catch (ArrayIndexOutOfBoundsException | UnknownHostException e) {
-        System.out.println("Client ist nicht mehr vorhanden!");
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+      for (int i = 1; i <= checkSensor.sensors.size(); i++) {
+        try {
+          if (checkSensor.isAlive.get(i - 1)) {
+            InetAddress Address = InetAddress.getByName(checkSensor.sensors.get(i - 1));
+            DatagramPacket p = new DatagramPacket(messageBuffer, messageBuffer.length, Address,
+                1235);
+            udpSocket.send(p);
+          }
+        } catch (ArrayIndexOutOfBoundsException | UnknownHostException e) {
+          // System.out.println("Client ist nicht mehr vorhanden!");
+          // System.out.print("\033[H\033[2J");
+          // System.out.flush();
+        }
       }
     }
-  }}
+  }
+
+
 
 
 

@@ -12,24 +12,53 @@ import java.util.ArrayList;
 
 public class checkSensor extends Thread {
 
-public static ArrayList<Boolean> isAlive = new ArrayList<>();
+public static ArrayList<Boolean> isAlive =new ArrayList<>();
 public static ArrayList<String> sensors = new ArrayList<>();
+private SharedBuffer mybuffer = null;
+checkSensor(SharedBuffer mybuffer){
+
+  this.mybuffer = mybuffer;
+}
+
+
+public void initLists(){
+  for(int i = 1 ; i <= Server.ALIVE_SENSOR ; i++)
+  {
+    checkSensor.sensors.add("sensor"+ i);
+    checkSensor.isAlive.add(true);
+
+  }
+
+}
+
+
   public void run() {
 
 
       while(true) {
 
-        for (int i = 0; i < sensors.size(); i++) {
+        for (int i = 1; i <= sensors.size(); i++) {
           try {
 
-            InetAddress Address = InetAddress.getByName(sensors.get(i));
-            isAlive.add(check(Address, 1235));
+              InetAddress Address = InetAddress.getByName(checkSensor.sensors.get(i-1));
+              isAlive.set(i-1,check(Address, 1235));
 
           } catch (UnknownHostException | SocketException e) {
-            System.out.println(sensors.get(i) + " ist nicht mehr erreichbar!");
-            sensors.remove(i);
-          }
+           // System.out.println(sensors.get(i) + " ist nicht mehr erreichbar!");
+            isAlive.set((i-1),false);
+          //  mybuffer.clearBuffer();
 
+           // isAlive.add(i,false);
+          }
+          int SENSORCOUNTER = 0;
+          for(int j = 0 ; j < checkSensor.sensors.size(); j++)
+          {
+            if(checkSensor.isAlive.get(j))
+              SENSORCOUNTER++;
+
+           // System.out.println("SENSOR " + i+1 + " ist alive " + checkSensor.isAlive.get(j));
+          }
+          Server.ALIVE_SENSOR = SENSORCOUNTER;
 
         }
       }
@@ -47,6 +76,8 @@ public static ArrayList<String> sensors = new ArrayList<>();
     DatagramSocket socket = new DatagramSocket(1238);
     socket.connect(Address,1235);
     socket.close();
+
+
     isAlive = true;
     return isAlive;
   }

@@ -15,7 +15,7 @@ public class Server extends Thread {
     private final DatagramSocket udpSocket;
     private final int port;
     private final int threadname;
-    public static Integer ALIVE_SENSOR;
+    public static Integer ALIVE_SENSOR = Integer.parseInt(System.getenv("NUMBEROFSENSORS"));
     public static String ADDRESS;
     public static Integer PORT = 1234;
     private SharedBuffer buffer = null;
@@ -117,19 +117,19 @@ public class Server extends Thread {
         */
     public static void main(String[] args) throws Exception {
         String address = System.getenv("DESTINATIONTCP");
-        ALIVE_SENSOR = Integer.parseInt(System.getenv("NUMBERPORTS"));
+
         ADDRESS = InetAddress.getByName("iot").toString();
 
-        checkSensor.sensors.add("sensor1");
-        checkSensor.sensors.add("sensor2");
-        checkSensor.sensors.add("sensor3");
-        checkSensor.sensors.add("sensor4");
+       // checkSensor.sensors.add("sensor1");
+       // checkSensor.sensors.add("sensor2");
+       // checkSensor.sensors.add("sensor3");
+       // checkSensor.sensors.add("sensor4");
         //UDP SOCKET
         DatagramSocket socket = new DatagramSocket(1234);
         //SHAREDBUFFER FOR THREADS
         SharedBuffer ourBuffer = new SharedBuffer();
         //CHECK SENSORS ALIVE
-        checkSensor check = new checkSensor();
+        checkSensor check = new checkSensor(ourBuffer);
         //GET HTTP POST RESPONSE
         TCPresponse serverSocket = new TCPresponse();
         Server server = new Server(1234, socket, 4,ourBuffer);
@@ -137,6 +137,7 @@ public class Server extends Thread {
         PullThread pullrequest = new PullThread(socket,ourBuffer);
 
         serverSocket.start();
+        check.initLists();
         new Thread(check).start();
         new Thread(pullrequest).start();
 
@@ -148,12 +149,14 @@ public class Server extends Thread {
 
             socket.receive(packet);
             String message = new String(packet.getData()).trim();
-
+          //  System.out.println("Got a Message from " + packet.getAddress());
+          //  System.out.println(message);
             ourBuffer.put(message);
-         //   UDPHandler thread = new UDPHandler(packet,ourBuffer);
+           // UDPHandler thread = new UDPHandler(packet,ourBuffer);
            // thread.start();
-            System.out.println("Buffergröße: " + ourBuffer.getBufferSize());
-            if(ourBuffer.getBufferSize() == 4) {
+           // System.out.println("ALIVE SENSORS: " + ALIVE_SENSOR);
+
+            if(ourBuffer.getBufferSize() == ALIVE_SENSOR) {
                 //SEND DATA TO HTTP SERVER - > TCP
                 TCPHandler Client = new TCPHandler(new Socket(address, 53257),ourBuffer);
                 Client.start();

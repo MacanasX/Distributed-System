@@ -40,7 +40,7 @@ public class TCPresponse extends Thread {
       String message = null;
       try {
         message = dataInputStream.readUTF();
-        System.out.println(message);
+       // System.out.println(message);
       } catch (IOException e) {
         e.printStackTrace();
       }
