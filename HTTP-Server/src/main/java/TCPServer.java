@@ -18,12 +18,14 @@ public class TCPServer implements Runnable {
         String destination = System.getenv("DESTINATIONTCP");
         String response;
 
-        InputStream inputStream = this.TCPsocket.getInputStream();
-        DataInputStream dataInputStream = new DataInputStream(inputStream);
+      //  InputStream inputStream = this.TCPsocket.getInputStream();
+     //  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        DataInputStream input = new DataInputStream(this.TCPsocket.getInputStream());
 
 
 
-        String message = dataInputStream.readUTF();
+        String message = input.readUTF();
         System.out.println("Got a Message from: " + this.TCPsocket.getInetAddress() );
         System.out.println(message);
         HTTPPost header = new HTTPPost();
@@ -31,15 +33,15 @@ public class TCPServer implements Runnable {
        // PrintStream output = new PrintStream(TCPsocket.getOutputStream());
        // output.println(response);
 
-       Socket dest = new Socket(destination, 53257);
+       Socket dest = new Socket(destination, 53258);
 
         OutputStream outputStream = dest.getOutputStream();
          //create a data output stream from the output stream so we can send data through it
         DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
         dataOutputStream.writeUTF(response);
-        dataOutputStream.flush();
-        dataOutputStream.close();
+       // dataOutputStream.flush();
+      //  dataOutputStream.close();
 
     }
 
@@ -47,6 +49,7 @@ public class TCPServer implements Runnable {
 public void run(){
 
     try {
+      System.out.println("THREAD ERZEUGT!");
         this.listen();
     } catch (IOException | ClassNotFoundException e) {
         e.printStackTrace();

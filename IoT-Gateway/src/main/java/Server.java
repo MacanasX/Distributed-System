@@ -4,6 +4,8 @@ import java.io.OutputStream;
 import java.net.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import org.json.simple.JSONObject;
 //import org.json.simple.parser.JSONParser;
@@ -119,6 +121,8 @@ public class Server extends Thread {
         String address = System.getenv("DESTINATIONTCP");
 
         ADDRESS = InetAddress.getByName("iot").toString();
+        BlockingQueue<String> sharedQueue = new LinkedBlockingQueue<String>();
+
 
        // checkSensor.sensors.add("sensor1");
        // checkSensor.sensors.add("sensor2");
@@ -135,7 +139,9 @@ public class Server extends Thread {
         Server server = new Server(1234, socket, 4,ourBuffer);
         //GET SENSORS DATA
         PullThread pullrequest = new PullThread(socket,ourBuffer);
+        TCPHandler Client = new TCPHandler(new Socket(address, 53257),sharedQueue);
 
+        Client.start();
         serverSocket.start();
         check.initLists();
         new Thread(check).start();
@@ -148,19 +154,18 @@ public class Server extends Thread {
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
             socket.receive(packet);
-            String message = new String(packet.getData()).trim();
+           // String message = new String(packet.getData()).trim();
           //  System.out.println("Got a Message from " + packet.getAddress());
           //  System.out.println(message);
-            ourBuffer.put(message);
-           // UDPHandler thread = new UDPHandler(packet,ourBuffer);
-           // thread.start();
+            //ourBuffer.put(message);
+            UDPHandler thread = new UDPHandler(packet,sharedQueue);
+            thread.start();
            // System.out.println("ALIVE SENSORS: " + ALIVE_SENSOR);
 
-            if(ourBuffer.getBufferSize() == ALIVE_SENSOR) {
+          //  if(ourBuffer.getBufferSize() == ALIVE_SENSOR) {
                 //SEND DATA TO HTTP SERVER - > TCP
-                TCPHandler Client = new TCPHandler(new Socket(address, 53257),ourBuffer);
-                Client.start();
-            }
+
+           // }
 
         }
 

@@ -4,6 +4,7 @@ import java.net.DatagramSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import com.google.gson.*;
+import java.util.concurrent.BlockingQueue;
 
 public class UDPHandler extends Thread   {
 
@@ -12,11 +13,12 @@ public class UDPHandler extends Thread   {
   private ArrayList<String> messageBuffer;
   private SharedBuffer myBuffer = null;
   private  DatagramPacket packet= null;
-  UDPHandler(DatagramPacket packet,SharedBuffer myBuffer){
+  private BlockingQueue<String> myQ = null;
+  UDPHandler(DatagramPacket packet, BlockingQueue<String> myQ){
 
     this.packet = packet;
     this.myBuffer = myBuffer;
-
+    this.myQ= myQ;
   }
 
 
@@ -26,8 +28,8 @@ public class UDPHandler extends Thread   {
 
     String message = new String(packet.getData()).trim();
 
-    myBuffer.put(message);
-      System.out.println("Got a Message from " + packet.getAddress());
+    myQ.add(message);
+     // System.out.println("Got a Message from " + packet.getAddress());
     // System.out.println(
     //     new GsonBuilder().setPrettyPrinting().create().toJson(new JsonParser().parse(message)));
 

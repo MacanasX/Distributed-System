@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class SharedBuffer {
 
 
   public volatile boolean available = false;
+  private BlockingQueue<String> sharedQueue =null;
   private ArrayList<String> data ;
   private int bufferSize = 0;
   private int  maxBufferSize= 4;
@@ -11,6 +14,7 @@ public class SharedBuffer {
   SharedBuffer()
   {
     this.data = new ArrayList<>();
+    this.sharedQueue =  new LinkedBlockingQueue<String>();
   }
 
   public synchronized void put(String x) {

@@ -13,7 +13,7 @@ public class TCPresponse extends Thread {
 
 
   TCPresponse() throws IOException {
-    this.serverSocket = new ServerSocket(53257);
+    this.serverSocket = new ServerSocket(53258);
 
 
   }
@@ -40,7 +40,7 @@ public class TCPresponse extends Thread {
       String message = null;
       try {
         message = dataInputStream.readUTF();
-       // System.out.println(message);
+        System.out.println(message);
       } catch (IOException e) {
         e.printStackTrace();
       }
