@@ -18,6 +18,8 @@ public class TCPHandler extends Thread {
   private String tcp = "";
   private Logger logger = null;
   private FileHandler filehandler = null;
+  public static long startMilliSeconds;
+//  public static long endeMilliSeconds;
   TCPHandler(Socket mySocket, BlockingQueue<String> myQ) throws IOException {
 
         this.TCPsocket = mySocket;
@@ -25,7 +27,8 @@ public class TCPHandler extends Thread {
         this.myQ= myQ;
         this.tcp=  System.getenv("DESTINATIONTCP");
         this.logger = Logger.getLogger("MyRTT");
-        this.filehandler = new FileHandler("./MyRTT.log");
+        this.filehandler = new FileHandler("/sharedData/RTT/MyRTT.log");
+     //   /file/path/in/container/file /host/local/path/file
     }
 
     public void run() {
@@ -40,6 +43,8 @@ public class TCPHandler extends Thread {
        // DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
         HTTPRequest myrequest = new HTTPRequest();
         String TCPmessage = "";
+        int logCounter = 0;
+
       while (true) {
          // this.TCPsocket = new Socket(tcp,53257);
 
@@ -56,17 +61,19 @@ public class TCPHandler extends Thread {
               TCPmessage = TCPmessage + "," + "\n";
 
           } */
-
           TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
-       //   System.out.println(TCPmessage);
+          System.out.println("HIER IST DIE MESSAGE AG WANN DIE MESSUNG LOSGEHT! " + TCPmessage);
         DataOutputStream output = new DataOutputStream(this.TCPsocket.getOutputStream());
-          output.writeUTF(TCPmessage);
+        output.writeUTF(TCPmessage);
         Calendar calendar = Calendar.getInstance();
 
         // Getting the time in milliseconds.
-        long milliSeconds = calendar.getTimeInMillis();
-        ;
-          logger.info(String.valueOf(milliSeconds));
+         startMilliSeconds = calendar.getTimeInMillis();
+
+
+          logger.info("Startzeit " + logCounter+ ": " + String.valueOf(startMilliSeconds));
+         // System.out.println("test MILLISEKUNDEN: "  + startMilliSeconds);
+          logCounter++;
 
           output.flush();
           this.TCPsocket.close();

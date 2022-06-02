@@ -154,9 +154,10 @@ public class Server extends Thread {
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
 
             socket.receive(packet);
-           // String message = new String(packet.getData()).trim();
+         //   String message = new String(packet.getData()).trim();
           //  System.out.println("Got a Message from " + packet.getAddress());
           //  System.out.println(message);
+
             //ourBuffer.put(message);
             UDPHandler thread = new UDPHandler(packet,sharedQueue);
             thread.start();

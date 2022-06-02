@@ -10,6 +10,7 @@ RUN mvn package
 
 FROM openjdk:11.0-jre-slim
 
+RUN mkdir -p /sharedData/RTT
 RUN mkdir -p /app
 COPY --from=build /app/target/IoT-Gateway-1.0-SNAPSHOT.jar /app
 CMD ["java","-jar","/app/IoT-Gateway-1.0-SNAPSHOT.jar"]

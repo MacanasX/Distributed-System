@@ -9,6 +9,9 @@ services:
     container_name : IotGateway
     depends_on:
       - "HTTPserver"
+    volumes:
+      - ./sharedFolder:/sharedData/RTT
+
     environment:
       NUMBEROFSENSORS: "4"
       DESTINATIONTCP: "HTTPserver"
