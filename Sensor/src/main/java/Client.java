@@ -13,6 +13,7 @@ public class Client {
     private InetAddress inetAddress;
     private byte [] buffer;
     private Scanner scanner;
+    public static int messageCounterId = 0;
 
     private Client(DatagramSocket datagramsocket, InetAddress inetAddress) throws IOException {
 

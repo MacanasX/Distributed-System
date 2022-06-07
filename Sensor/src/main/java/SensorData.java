@@ -39,11 +39,13 @@ public class SensorData {
     public JSONObject serializeToJSON ()
     {
         JSONObject jsonObject = new JSONObject();
+        jsonObject.put("messageId", Client.messageCounterId);
+        Client.messageCounterId++;
         jsonObject.put("timestamp", this.time);
         jsonObject.put("unit",this.unit);
         jsonObject.put("value", this.value);
         jsonObject.put("sensor_type", sensor.getType());
-        jsonObject.put("id",sensor.getMyID());
+        jsonObject.put("sensorId",sensor.getMyID());
         jsonObject.put("name", sensor.getSensorName());
 
 

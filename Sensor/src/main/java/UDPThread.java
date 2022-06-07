@@ -9,6 +9,7 @@ public class UDPThread implements Runnable {
   DatagramPacket udpPacket=null;
   DatagramSocket Socket=null;
 
+
   UDPThread(DatagramPacket packet, DatagramSocket Socket){
     this.udpPacket = packet;
     this.Socket =  Socket;
@@ -18,7 +19,6 @@ public class UDPThread implements Runnable {
   public void run(){
 
     String message = new String(this.udpPacket.getData()).trim();
-
     if(message.equals("PULL"))
     {
      // System.out.println("PULL angekommen!");

@@ -14,7 +14,7 @@ RUN mvn package
 #Finaler Container
 FROM openjdk:11.0-jre-slim
 RUN mkdir -p /app
-COPY --from=BUILD /app/target/HTTP-Server-1.0-SNAPSHOT.jar /app
+COPY --from=BUILD /app/target/HTTP-Server-1.0-SNAPSHOT-jar-with-dependencies.jar /app
 
 
-CMD ["java", "-jar", "/app/HTTP-Server-1.0-SNAPSHOT.jar"]
+CMD ["java", "-jar", "/app/HTTP-Server-1.0-SNAPSHOT-jar-with-dependencies.jar"]

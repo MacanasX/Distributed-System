@@ -1,6 +1,13 @@
 version: '3'
 
 services:
+  Database:
+    image: groupe_b_9/database:latest
+    build:
+      context: ./Database/
+      dockerfile: Dockerfile
+    container_name: Database
+
   iot:
     image: groupe_b_9/server:latest
     build:
@@ -85,6 +92,9 @@ services:
     container_name: HTTP-Server
     environment:
        DESTINATIONTCP: "iot"
+    depends_on:
+      - "Database"
+
 
 
 
