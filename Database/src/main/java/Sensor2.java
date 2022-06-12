@@ -1,6 +1,4 @@
-import org.json.simple.JSONObject;
-
-public class Sensor {
+public class Sensor2 {
 
   private String name;
   private Integer messageId;
@@ -67,7 +65,7 @@ public class Sensor {
     this.timestamp = timestamp;
   }
 
-  public Sensor(String name, Integer messageId, String unit, Double value,
+  public Sensor2(String name, Integer messageId, String unit, Double value,
       String sensorType, Integer sensorId, String timestamp) {
     this.name = name;
     this.messageId = messageId;

@@ -3,8 +3,8 @@ import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TSimpleServer;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
-import server.*;
-import server.CRUD.Processor;
+import thriftserver.*;
+
 
 public class DatabaseServer {
   /** The port the server listens to. */
@@ -35,6 +35,7 @@ public class DatabaseServer {
    // handler = new ServerHandler();
     //processor = new Processor<>(handler);
    // startSimpleServer(processor);
+
     startSimpleServer(new CRUD.Processor<>(new ServerHandler()));
    // startSimpleServer(new Calc.Processor<>(new ServerHandler()));
 

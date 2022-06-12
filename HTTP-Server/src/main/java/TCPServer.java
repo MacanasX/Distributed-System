@@ -1,5 +1,4 @@
-import databaseclient.CRUD;
-import databaseclient.CRUD.Client;
+import databaseclient.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -50,18 +49,35 @@ public class TCPServer implements Runnable {
             try (TTransport transport = new TSocket(HOST, PORT)){
                 transport.open();
                 TProtocol protocol = new TBinaryProtocol(transport);
-                CRUD.Client client  = new Client(protocol);
+                CRUD.Client client  = new CRUD.Client(protocol);
                 JSONParser parser = new JSONParser();
-                System.out.println("Ausgabe von checkresponse: " + checkresponse[checkresponse.length-1]);
+               // System.out.println("Ausgabe von checkresponse: " + checkresponse[checkresponse.length-1]);
 
                 JSONObject json = (JSONObject) parser.parse(checkresponse[checkresponse.length-1]);
 
                 //CRUD.Client client = new CRUD.Client(protocol);
+                //Generate Sensor Object for Database
+                Sensor database = new Sensor();
+                database.setUnit(json.get("unit").toString());
+                database.setSensorName(json.get("name").toString());
+                database.setMessageId(Integer.parseInt(json.get("messageId").toString()));
+                database.setValue(Double.parseDouble(json.get("value").toString()));
+                database.setSensorType(json.get("sensor_type").toString());
+                database.setTimestamp(json.get("timestamp").toString());
+                database.setId(Integer.parseInt(json.get("sensorId").toString()));
 
-                client.insert(json.get("unit").toString(),json.get("name").toString(),json.get("messageId").toString()
-                    ,json.get("value").toString(),json.get("sensor_type").toString(),json.get("timestamp").toString(),
-                    json.get("sensorId").toString());
+               // client.insert(json.get("unit").toString(),json.get("name").toString(),json.get("messageId").toString()
+                //    ,json.get("value").toString(),json.get("sensor_type").toString(),json.get("timestamp").toString(),
+                //    json.get("sensorId").toString());
+                //Call RPC for Database
 
+                client.insert(database);
+
+                /* Test calls for functions
+               System.out.println("Select Methode called : " + client.select(database));
+                System.out.println("Remove called : " +  client.remove(database));
+                System.out.println("Remove called second time  : " +  client.remove(database));
+                */
 
             } catch (TException e) {
                 e.printStackTrace();
