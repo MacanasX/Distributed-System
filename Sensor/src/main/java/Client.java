@@ -32,7 +32,6 @@ public class Client {
         if(msg.equals("PULL")){
            this.start();
 
-
         }
 
 

@@ -13,6 +13,8 @@
         <module>IoT-Gateway</module>
         <module>HTTP-Server</module>
       <module>Database</module>
+      <module>MQTTAdapter</module>
+        <module>MQTTSensor</module>
     </modules>
 
     <properties>

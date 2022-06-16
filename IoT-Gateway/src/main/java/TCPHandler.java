@@ -49,25 +49,14 @@ public class TCPHandler extends Thread {
         int logCounter = 0;
 
       while (true) {
-         // this.TCPsocket = new Socket(tcp,53257);
-
-          // create a data output stream from the output stream so we can send data through it
 
             TCPmessage = myQ.take();
 
-         // System.out.println(TCPmessage);
 
-          // if (TCPHandler.messageBuffer.size() != 0) {
-        /*  while (!myBuffer.isEmpty()) {  //myBuffer.getBufferSize() > 0
-
-            TCPmessage = TCPmessage + myBuffer.get();
-            if (myBuffer.getBufferSize() > 0)
-              TCPmessage = TCPmessage + "," + "\n";
-
-          } */
           TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
         //  System.out.println("HIER IST DIE MESSAGE AG WANN DIE MESSUNG LOSGEHT! " + TCPmessage);
         DataOutputStream output = new DataOutputStream(this.TCPsocket.getOutputStream());
+       // output.writeUTF(myrequest.generateHTTPHeader("hallo welt"));
         output.writeUTF(TCPmessage);
 
         Calendar calendar = Calendar.getInstance();

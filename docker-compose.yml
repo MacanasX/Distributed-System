@@ -96,5 +96,83 @@ services:
       - "Database"
 
 
+  mosquitto:
+    image: "eclipse-mosquitto"
+    container_name: "mosquitto"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./sharedFolder/mosquitto.conf:/mosquitto/config/mosquitto.conf
 
+
+  sensor5:
+    image: groupe_b_9/mqttsensor:latest
+    build:
+      context: ./MQTTSensor/
+      dockerfile: Dockerfile
+    container_name: Sensor5
+    depends_on:
+      - mosquitto
+    environment:
+      SENSOR_NAME: "Heizung Schlafzimmer"
+      SENSOR_TYPE: "Temperatur"
+      SENSOR_ID: "5"
+
+  sensor6:
+    image: groupe_b_9/mqttsensor:latest
+
+    build:
+      context: ./MQTTSensor/
+      dockerfile: Dockerfile
+    container_name: Sensor6
+    depends_on:
+      - mosquitto
+    environment:
+
+      SENSOR_NAME: "Dachterasse"
+      SENSOR_TYPE: "Helligkeit"
+      SENSOR_ID: "6"
+
+  sensor7:
+    image: groupe_b_9/mqttsensor:latest
+
+    build:
+      context: ./MQTTSensor/
+      dockerfile: Dockerfile
+    container_name: Sensor7
+    depends_on:
+      - mosquitto
+    environment:
+      SENSOR_NAME: "Dach"
+      SENSOR_TYPE: "Niederschlag"
+      SENSOR_ID: "7"
+
+  sensor8:
+    image: groupe_b_9/mqttsensor:latest
+
+    build:
+      context: ./MQTTSensor/
+      dockerfile: Dockerfile
+
+    container_name: Sensor8
+    depends_on:
+      - mosquitto
+    environment:
+      SENSOR_NAME: "Teich"
+      SENSOR_TYPE: "Wind"
+      SENSOR_ID: "8"
+
+
+  MQTTAdapter:
+      image: groupe_b_9/mqttadapter:latest
+
+      build:
+          context: ./MQTTAdapter/
+          dockerfile: Dockerfile
+      container_name: MQTTAdapter
+      depends_on:
+        - mosquitto
+      environment:
+        DESTINATION: "iot"
 

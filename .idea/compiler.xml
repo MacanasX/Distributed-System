@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Database" />
+        <module name="MQTTAdapter" />
         <module name="HTTP-Server" />
         <module name="IoT-Gateway" />
         <module name="Sensor" />
+        <module name="MQTTSensor" />
       </profile>
     </annotationProcessing>
   </component>

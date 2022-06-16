@@ -25,7 +25,7 @@ public class TCPServer implements Runnable {
 
     }
 
-    public void listen() throws IOException, ClassNotFoundException {
+    public void listen() throws IOException, ClassNotFoundException, ParseException {
         String destination = System.getenv("DESTINATIONTCP");
         String response;
         String [] checkresponse;
@@ -44,50 +44,7 @@ public class TCPServer implements Runnable {
         response=header.checkHtppMessage(message);
 
         checkresponse = message.split("\\r?\\n");
-       // if(checkresponse[0].equals("HTTP/1.1 200 OK /"))
-       // {
-            try (TTransport transport = new TSocket(HOST, PORT)){
-                transport.open();
-                TProtocol protocol = new TBinaryProtocol(transport);
-                CRUD.Client client  = new CRUD.Client(protocol);
-                JSONParser parser = new JSONParser();
-               // System.out.println("Ausgabe von checkresponse: " + checkresponse[checkresponse.length-1]);
 
-                JSONObject json = (JSONObject) parser.parse(checkresponse[checkresponse.length-1]);
-
-                //CRUD.Client client = new CRUD.Client(protocol);
-                //Generate Sensor Object for Database
-                Sensor database = new Sensor();
-                database.setUnit(json.get("unit").toString());
-                database.setSensorName(json.get("name").toString());
-                database.setMessageId(Integer.parseInt(json.get("messageId").toString()));
-                database.setValue(Double.parseDouble(json.get("value").toString()));
-                database.setSensorType(json.get("sensor_type").toString());
-                database.setTimestamp(json.get("timestamp").toString());
-                database.setId(Integer.parseInt(json.get("sensorId").toString()));
-
-               // client.insert(json.get("unit").toString(),json.get("name").toString(),json.get("messageId").toString()
-                //    ,json.get("value").toString(),json.get("sensor_type").toString(),json.get("timestamp").toString(),
-                //    json.get("sensorId").toString());
-                //Call RPC for Database
-
-                client.insert(database);
-
-                /* Test calls for functions
-               System.out.println("Select Methode called : " + client.select(database));
-                System.out.println("Remove called : " +  client.remove(database));
-                System.out.println("Remove called second time  : " +  client.remove(database));
-                */
-
-            } catch (TException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-        //}
-       // PrintStream output = new PrintStream(TCPsocket.getOutputStream());
-       // output.println(response);
 
        Socket dest = new Socket(destination, 53258);
 
@@ -101,13 +58,12 @@ public class TCPServer implements Runnable {
 
     }
 
-
 public void run(){
 
     try {
      // System.out.println("THREAD ERZEUGT!");
         this.listen();
-    } catch (IOException | ClassNotFoundException e) {
+    } catch (IOException | ClassNotFoundException | ParseException e) {
         e.printStackTrace();
     }
 
