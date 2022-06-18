@@ -12,23 +12,21 @@ public class UDP extends Thread {
   private InetAddress inetAddress;
   private byte [] buffer;
   private BlockingQueue<String> myQ = null;
+  private Subscriber subscriber = null;
 
-
-  UDP(DatagramSocket udpSocket, InetAddress inetAddress,BlockingQueue<String> myQ){
+  UDP(DatagramSocket udpSocket, InetAddress inetAddress,BlockingQueue<String> myQ,Subscriber subscriber){
 
     this.udpSocket = udpSocket;
     this.inetAddress= inetAddress;
     this.myQ = myQ;
+    this.subscriber = subscriber;
   }
 
   public void run() {
     String dest = System.getenv("DESTINATION");
-    String message = null;
-    try {
-      message = myQ.take();
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
+
+    String message = subscriber.getCurrentMessage();
+
     byte[] buffer = message.getBytes();
     InetAddress Address = null;
     try {

@@ -121,7 +121,7 @@ public class Server extends Thread {
         String address = System.getenv("DESTINATIONTCP");
 
         ADDRESS = InetAddress.getByName("iot").toString();
-        BlockingQueue<String> sharedQueue = new LinkedBlockingQueue<String>(5);
+        BlockingQueue<String> sharedQueue = new LinkedBlockingQueue<String>(8);
 
 
        // checkSensor.sensors.add("sensor1");

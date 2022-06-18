@@ -34,6 +34,7 @@ public void run() {
 
   String name = System.getenv("SENSOR_NAME");
   String type = System.getenv("SENSOR_TYPE");
+  String Id = System.getenv("SENSOR_ID");
   int sensID = Integer.parseInt(System.getenv("SENSOR_ID"));
 
 
@@ -47,17 +48,19 @@ public void run() {
     String messageJson =sensorData.serializeToJSON().toString();
 
     MqttMessage message = new MqttMessage(messageJson.getBytes());
+
     try {
-      Thread.sleep(4000);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
-    try {
-      client.publish("sensordata", message);
+      client.publish(Id, message);
     } catch (MqttException e) {
       e.printStackTrace();
     }
-
+    {
+     /* try {
+        Thread.sleep(5000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      } */
+    }
 
   }
 }

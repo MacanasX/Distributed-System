@@ -1,0 +1,392 @@
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 0 :83 ms
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 1 :116 ms
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 2 :118 ms
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 3 :120 ms
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 4 :120 ms
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 5 :122 ms
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 6 :123 ms
+Jun 18, 2022 10:51:29 PM TCPresponse run
+INFO: RTT for 7 :123 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 8 :2 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 9 :2 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 10 :3 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 11 :4 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 12 :4 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 13 :5 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 14 :6 ms
+Jun 18, 2022 10:51:33 PM TCPresponse run
+INFO: RTT for 15 :7 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 16 :0 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 17 :1 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 18 :2 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 19 :4 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 20 :5 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 21 :6 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 22 :6 ms
+Jun 18, 2022 10:51:37 PM TCPresponse run
+INFO: RTT for 23 :7 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 24 :1 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 25 :1 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 26 :33 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 27 :34 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 28 :35 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 29 :35 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 30 :35 ms
+Jun 18, 2022 10:51:41 PM TCPresponse run
+INFO: RTT for 31 :36 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 32 :1 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 33 :2 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 34 :1 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 35 :2 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 36 :7 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 37 :9 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 38 :8 ms
+Jun 18, 2022 10:51:45 PM TCPresponse run
+INFO: RTT for 39 :9 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 40 :2 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 41 :3 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 42 :4 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 43 :4 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 44 :4 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 45 :5 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 46 :5 ms
+Jun 18, 2022 10:51:49 PM TCPresponse run
+INFO: RTT for 47 :6 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 48 :1 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 49 :2 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 50 :2 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 51 :2 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 52 :3 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 53 :3 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 54 :3 ms
+Jun 18, 2022 10:51:53 PM TCPresponse run
+INFO: RTT for 55 :4 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 56 :1 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 57 :2 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 58 :1 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 59 :2 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 60 :3 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 61 :3 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 62 :3 ms
+Jun 18, 2022 10:51:57 PM TCPresponse run
+INFO: RTT for 63 :3 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 64 :2 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 65 :3 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 66 :3 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 67 :3 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 68 :4 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 69 :4 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 70 :5 ms
+Jun 18, 2022 10:52:01 PM TCPresponse run
+INFO: RTT for 71 :5 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 72 :1 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 73 :2 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 74 :2 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 75 :3 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 76 :2 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 77 :3 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 78 :3 ms
+Jun 18, 2022 10:52:05 PM TCPresponse run
+INFO: RTT for 79 :4 ms
+Jun 18, 2022 10:52:09 PM TCPresponse run
+INFO: RTT for 80 :1 ms
+Jun 18, 2022 10:52:09 PM TCPresponse run
+INFO: RTT for 81 :2 ms
+Jun 18, 2022 10:52:09 PM TCPresponse run
+INFO: RTT for 82 :3 ms
+Jun 18, 2022 10:52:09 PM TCPresponse run
+INFO: RTT for 83 :2 ms
+Jun 18, 2022 10:52:13 PM TCPresponse run
+INFO: RTT for 84 :1 ms
+Jun 18, 2022 10:52:13 PM TCPresponse run
+INFO: RTT for 85 :51 ms
+Jun 18, 2022 10:52:13 PM TCPresponse run
+INFO: RTT for 86 :51 ms
+Jun 18, 2022 10:52:13 PM TCPresponse run
+INFO: RTT for 87 :52 ms
+Jun 18, 2022 10:52:17 PM TCPresponse run
+INFO: RTT for 88 :0 ms
+Jun 18, 2022 10:52:17 PM TCPresponse run
+INFO: RTT for 89 :1 ms
+Jun 18, 2022 10:52:17 PM TCPresponse run
+INFO: RTT for 90 :2 ms
+Jun 18, 2022 10:52:17 PM TCPresponse run
+INFO: RTT for 91 :2 ms
+Jun 18, 2022 10:52:21 PM TCPresponse run
+INFO: RTT for 92 :1 ms
+Jun 18, 2022 10:52:21 PM TCPresponse run
+INFO: RTT for 93 :2 ms
+Jun 18, 2022 10:52:21 PM TCPresponse run
+INFO: RTT for 94 :1 ms
+Jun 18, 2022 10:52:21 PM TCPresponse run
+INFO: RTT for 95 :2 ms
+Jun 18, 2022 10:52:25 PM TCPresponse run
+INFO: RTT for 96 :1 ms
+Jun 18, 2022 10:52:25 PM TCPresponse run
+INFO: RTT for 97 :1 ms
+Jun 18, 2022 10:52:25 PM TCPresponse run
+INFO: RTT for 98 :2 ms
+Jun 18, 2022 10:52:25 PM TCPresponse run
+INFO: RTT for 99 :2 ms
+Jun 18, 2022 10:52:29 PM TCPresponse run
+INFO: RTT for 100 :1 ms
+Jun 18, 2022 10:52:29 PM TCPresponse run
+INFO: RTT for 101 :2 ms
+Jun 18, 2022 10:52:29 PM TCPresponse run
+INFO: RTT for 102 :2 ms
+Jun 18, 2022 10:52:29 PM TCPresponse run
+INFO: RTT for 103 :2 ms
+Jun 18, 2022 10:52:33 PM TCPresponse run
+INFO: RTT for 104 :1 ms
+Jun 18, 2022 10:52:33 PM TCPresponse run
+INFO: RTT for 105 :2 ms
+Jun 18, 2022 10:52:33 PM TCPresponse run
+INFO: RTT for 106 :2 ms
+Jun 18, 2022 10:52:33 PM TCPresponse run
+INFO: RTT for 107 :3 ms
+Jun 18, 2022 10:52:37 PM TCPresponse run
+INFO: RTT for 108 :1 ms
+Jun 18, 2022 10:52:37 PM TCPresponse run
+INFO: RTT for 109 :2 ms
+Jun 18, 2022 10:52:37 PM TCPresponse run
+INFO: RTT for 110 :2 ms
+Jun 18, 2022 10:52:37 PM TCPresponse run
+INFO: RTT for 111 :2 ms
+Jun 18, 2022 10:52:41 PM TCPresponse run
+INFO: RTT for 112 :1 ms
+Jun 18, 2022 10:52:41 PM TCPresponse run
+INFO: RTT for 113 :2 ms
+Jun 18, 2022 10:52:41 PM TCPresponse run
+INFO: RTT for 114 :2 ms
+Jun 18, 2022 10:52:41 PM TCPresponse run
+INFO: RTT for 115 :2 ms
+Jun 18, 2022 10:52:41 PM TCPresponse run
+INFO: RTT for 116 :3 ms
+Jun 18, 2022 10:52:45 PM TCPresponse run
+INFO: RTT for 117 :1 ms
+Jun 18, 2022 10:52:45 PM TCPresponse run
+INFO: RTT for 118 :2 ms
+Jun 18, 2022 10:52:45 PM TCPresponse run
+INFO: RTT for 119 :3 ms
+Jun 18, 2022 10:52:45 PM TCPresponse run
+INFO: RTT for 120 :2 ms
+Jun 18, 2022 10:52:45 PM TCPresponse run
+INFO: RTT for 121 :3 ms
+Jun 18, 2022 10:52:49 PM TCPresponse run
+INFO: RTT for 122 :2 ms
+Jun 18, 2022 10:52:49 PM TCPresponse run
+INFO: RTT for 123 :2 ms
+Jun 18, 2022 10:52:49 PM TCPresponse run
+INFO: RTT for 124 :2 ms
+Jun 18, 2022 10:52:49 PM TCPresponse run
+INFO: RTT for 125 :3 ms
+Jun 18, 2022 10:52:49 PM TCPresponse run
+INFO: RTT for 126 :2 ms
+Jun 18, 2022 10:52:53 PM TCPresponse run
+INFO: RTT for 127 :2 ms
+Jun 18, 2022 10:52:53 PM TCPresponse run
+INFO: RTT for 128 :3 ms
+Jun 18, 2022 10:52:53 PM TCPresponse run
+INFO: RTT for 129 :4 ms
+Jun 18, 2022 10:52:53 PM TCPresponse run
+INFO: RTT for 130 :5 ms
+Jun 18, 2022 10:52:53 PM TCPresponse run
+INFO: RTT for 131 :5 ms
+Jun 18, 2022 10:52:57 PM TCPresponse run
+INFO: RTT for 132 :1 ms
+Jun 18, 2022 10:52:57 PM TCPresponse run
+INFO: RTT for 133 :2 ms
+Jun 18, 2022 10:52:57 PM TCPresponse run
+INFO: RTT for 134 :3 ms
+Jun 18, 2022 10:52:57 PM TCPresponse run
+INFO: RTT for 135 :3 ms
+Jun 18, 2022 10:52:57 PM TCPresponse run
+INFO: RTT for 136 :3 ms
+Jun 18, 2022 10:53:01 PM TCPresponse run
+INFO: RTT for 137 :1 ms
+Jun 18, 2022 10:53:01 PM TCPresponse run
+INFO: RTT for 138 :1 ms
+Jun 18, 2022 10:53:01 PM TCPresponse run
+INFO: RTT for 139 :2 ms
+Jun 18, 2022 10:53:01 PM TCPresponse run
+INFO: RTT for 140 :3 ms
+Jun 18, 2022 10:53:01 PM TCPresponse run
+INFO: RTT for 141 :3 ms
+Jun 18, 2022 10:53:05 PM TCPresponse run
+INFO: RTT for 142 :1 ms
+Jun 18, 2022 10:53:05 PM TCPresponse run
+INFO: RTT for 143 :2 ms
+Jun 18, 2022 10:53:05 PM TCPresponse run
+INFO: RTT for 144 :3 ms
+Jun 18, 2022 10:53:05 PM TCPresponse run
+INFO: RTT for 145 :2 ms
+Jun 18, 2022 10:53:05 PM TCPresponse run
+INFO: RTT for 146 :3 ms
+Jun 18, 2022 10:53:09 PM TCPresponse run
+INFO: RTT for 147 :2 ms
+Jun 18, 2022 10:53:09 PM TCPresponse run
+INFO: RTT for 148 :2 ms
+Jun 18, 2022 10:53:09 PM TCPresponse run
+INFO: RTT for 149 :36 ms
+Jun 18, 2022 10:53:09 PM TCPresponse run
+INFO: RTT for 150 :37 ms
+Jun 18, 2022 10:53:09 PM TCPresponse run
+INFO: RTT for 151 :37 ms
+Jun 18, 2022 10:53:13 PM TCPresponse run
+INFO: RTT for 152 :1 ms
+Jun 18, 2022 10:53:13 PM TCPresponse run
+INFO: RTT for 153 :1 ms
+Jun 18, 2022 10:53:13 PM TCPresponse run
+INFO: RTT for 154 :2 ms
+Jun 18, 2022 10:53:13 PM TCPresponse run
+INFO: RTT for 155 :2 ms
+Jun 18, 2022 10:53:13 PM TCPresponse run
+INFO: RTT for 156 :2 ms
+Jun 18, 2022 10:53:17 PM TCPresponse run
+INFO: RTT for 157 :1 ms
+Jun 18, 2022 10:53:17 PM TCPresponse run
+INFO: RTT for 158 :2 ms
+Jun 18, 2022 10:53:17 PM TCPresponse run
+INFO: RTT for 159 :6 ms
+Jun 18, 2022 10:53:17 PM TCPresponse run
+INFO: RTT for 160 :6 ms
+Jun 18, 2022 10:53:17 PM TCPresponse run
+INFO: RTT for 161 :6 ms
+Jun 18, 2022 10:53:17 PM TCPresponse run
+INFO: RTT for 162 :7 ms
+Jun 18, 2022 10:53:17 PM TCPresponse run
+INFO: RTT for 163 :7 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 164 :1 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 165 :2 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 166 :6 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 167 :6 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 168 :7 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 169 :7 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 170 :7 ms
+Jun 18, 2022 10:53:21 PM TCPresponse run
+INFO: RTT for 171 :8 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 172 :2 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 173 :2 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 174 :4 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 175 :3 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 176 :4 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 177 :5 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 178 :6 ms
+Jun 18, 2022 10:53:25 PM TCPresponse run
+INFO: RTT for 179 :5 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 180 :1 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 181 :2 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 182 :3 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 183 :3 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 184 :4 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 185 :4 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 186 :5 ms
+Jun 18, 2022 10:53:29 PM TCPresponse run
+INFO: RTT for 187 :5 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 188 :1 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 189 :1 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 190 :2 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 191 :4 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 192 :5 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 193 :6 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 194 :6 ms
+Jun 18, 2022 10:53:33 PM TCPresponse run
+INFO: RTT for 195 :7 ms

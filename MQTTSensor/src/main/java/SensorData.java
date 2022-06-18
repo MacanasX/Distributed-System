@@ -55,6 +55,7 @@ public class SensorData {
         value = ((double)((int)(value *100.0)))/100.0;
         this.value = value;
         SimpleDateFormat date = new SimpleDateFormat("yyyy.MM.dd.HH:mm:ss");
+        date.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
         this.time = date.format(new Date());
 
         generateUnit();

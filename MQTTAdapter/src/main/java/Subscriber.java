@@ -9,11 +9,19 @@ public class Subscriber extends  Thread implements MqttCallback {
 
   private String broker;
   private BlockingQueue<String> myQ = null;
+  private String topic = null;
+  private String currentMessage =null;
 
-  Subscriber(BlockingQueue<String> myQ){
+  Subscriber(BlockingQueue<String> myQ, String sensorId){
 
     broker = "tcp://mosquitto:1883";
     this.myQ = myQ;
+    topic = sensorId;
+
+  }
+
+  public BlockingQueue<String> getMyQ() {
+    return myQ;
   }
 
   public void run(){
@@ -34,15 +42,24 @@ public class Subscriber extends  Thread implements MqttCallback {
     }
 
     // Subscribe to a topic.
-    try {
-      client.subscribe("sensordata");
-    } catch (MqttException e) {
-      e.printStackTrace();
+
+    while(true) {
+      try {
+        client.subscribe(topic);
+      } catch (MqttException e) {
+        e.printStackTrace();
+      }
+      try {
+        Thread.sleep(5000);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
-
-
   }
 
+  public String getCurrentMessage() {
+    return currentMessage;
+  }
 
   @Override
   public void connectionLost(Throwable throwable) {
@@ -52,8 +69,10 @@ public class Subscriber extends  Thread implements MqttCallback {
   @Override
   public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
     String arrivedMessage = new String(mqttMessage.getPayload());
-    System.out.println("Message arrived: " + arrivedMessage);
+   // System.out.println("Message arrived: " + arrivedMessage);
     myQ.add(arrivedMessage);
+    currentMessage = arrivedMessage;
+
   }
 
   @Override

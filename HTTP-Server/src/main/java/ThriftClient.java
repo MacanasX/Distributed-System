@@ -1,4 +1,5 @@
 import databaseclient.CRUD;
+import databaseclient.CRUD.Client;
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -18,6 +19,8 @@ public class ThriftClient extends  Thread {
       transport.open();
       TProtocol protocol = new TBinaryProtocol(transport);
       CRUD.Client client  = new CRUD.Client(protocol);
+      //CRUD.Client client1 = new Client(protocol);
+
 
       while(true) {
         //Call RPC for Database

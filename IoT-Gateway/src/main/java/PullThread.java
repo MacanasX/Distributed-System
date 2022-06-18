@@ -43,6 +43,7 @@ public class PullThread implements Runnable {
 
   public void PullRequest() throws IOException, InterruptedException {
     String[] sensoren = {"sensor1", "sensor2", "sensor3", "sensor4"};
+    String adapterString = "MQTTAdapter";
     String pullMessage = "PULL";
     Thread.sleep(4000);
     //TimeUnit.SECONDS.sleep(2);
@@ -64,6 +65,13 @@ public class PullThread implements Runnable {
           // System.out.flush();
         }
       }
+
+      InetAddress adapterAddress = InetAddress.getByName(adapterString);
+      DatagramPacket adapterPacket = new DatagramPacket(messageBuffer, messageBuffer.length, adapterAddress,1235);
+      udpSocket.send(adapterPacket);
+
+
+
     }
   }
 
