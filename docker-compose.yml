@@ -8,6 +8,14 @@ services:
       dockerfile: Dockerfile
     container_name: Database
 
+
+  Database2:
+    image: groupe_b_9/database2:latest
+    build:
+      context: ./Database/
+      dockerfile: Dockerfile
+    container_name: Database2
+
   iot:
     image: groupe_b_9/server:latest
     build:
