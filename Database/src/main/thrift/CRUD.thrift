@@ -18,6 +18,7 @@ service CRUD {
   bool insert (1: Sensor insert),
   Sensor select (1:Sensor select),
   bool update (1: Sensor update),
-  bool remove (1: Sensor remove)
-
+  bool remove (1: Sensor remove),
+  bool commit(1: Sensor toCommit),
+  bool abort (1: Sensor toAbort)
 }

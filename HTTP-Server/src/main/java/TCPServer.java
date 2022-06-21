@@ -26,37 +26,43 @@ public class TCPServer implements Runnable {
     }
 
     public void listen() throws IOException, ClassNotFoundException, ParseException {
-        String destination = System.getenv("DESTINATIONTCP");
-        String response;
-        String [] checkresponse;
-
-      //  InputStream inputStream = this.TCPsocket.getInputStream();
-     //  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-        DataInputStream input = new DataInputStream(this.TCPsocket.getInputStream());
 
 
 
-        String message = input.readUTF();
-        System.out.println("Got a Message from: " + this.TCPsocket.getInetAddress() );
-        System.out.println(message);
-        HTTPPost header = new HTTPPost();
-        response=header.checkHtppMessage(message);
+            String destination = System.getenv("DESTINATIONTCP");
+            String response;
+            String[] checkresponse;
 
-        checkresponse = message.split("\\r?\\n");
+            //  InputStream inputStream = this.TCPsocket.getInputStream();
+            //  BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+            DataInputStream input = new DataInputStream(this.TCPsocket.getInputStream());
+
+            String message = input.readUTF();
+            System.out.println("Got a Message from: " + this.TCPsocket.getInetAddress());
+            System.out.println(message);
+            HTTPPost header = new HTTPPost();
+            response = header.checkHtppMessage(message);
+
+            checkresponse = message.split("\\r?\\n");
+
+            Socket dest = new Socket(destination, 53258);
+
+            OutputStream outputStream = dest.getOutputStream();
+            //create a data output stream from the output stream so we can send data through it
+            DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
+
+            dataOutputStream.writeUTF(response);
+            // dataOutputStream.flush();
+            //  dataOutputStream.close();
+        }
 
 
-       Socket dest = new Socket(destination, 53258);
 
-        OutputStream outputStream = dest.getOutputStream();
-         //create a data output stream from the output stream so we can send data through it
-        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-        dataOutputStream.writeUTF(response);
-       // dataOutputStream.flush();
-      //  dataOutputStream.close();
 
-    }
+
+
 
 public void run(){
 

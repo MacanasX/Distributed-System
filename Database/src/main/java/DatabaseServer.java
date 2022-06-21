@@ -35,6 +35,8 @@ public class DatabaseServer {
    // handler = new ServerHandler();
     //processor = new Processor<>(handler);
    // startSimpleServer(processor);
+   // TCPServer tcpserver = new TCPServer();
+   // tcpserver.start();
 
     startSimpleServer(new CRUD.Processor<>(new ServerHandler()));
    // startSimpleServer(new Calc.Processor<>(new ServerHandler()));

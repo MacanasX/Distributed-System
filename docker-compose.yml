@@ -7,6 +7,8 @@ services:
       context: ./Database/
       dockerfile: Dockerfile
     container_name: Database
+    environment:
+      DATABASENAME: "DATABASE1"
 
 
   Database2:
@@ -15,6 +17,8 @@ services:
       context: ./Database/
       dockerfile: Dockerfile
     container_name: Database2
+    environment:
+      DATABASENAME: "DATABASE2"
 
   iot:
     image: groupe_b_9/server:latest

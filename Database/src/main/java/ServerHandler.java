@@ -9,6 +9,7 @@ import thriftserver.*;
 public class ServerHandler implements  CRUD.Iface {
 
 private ArrayList<Sensor> table = new ArrayList<>();
+public static ArrayList<Sensor> cache = new ArrayList<>();
 
 
  @Override
@@ -17,11 +18,11 @@ private ArrayList<Sensor> table = new ArrayList<>();
   if(table.isEmpty())
   {
    System.out.println("Generated new Table for Sensor");
-   table.add(insert);
+   cache.add(insert);
    System.out.println("Inserted " + insert.sensorName + " with Id " + insert.id + " and timestamp " + insert.timestamp + " into Database!" );
   }
   else{
-   table.add(insert);
+   cache.add(insert);
    System.out.println("Inserted " + insert.sensorName + " with Id " + insert.id + " and timestamp " + insert.timestamp + " into Database!" );
   }
   return true;
@@ -85,5 +86,33 @@ private ArrayList<Sensor> table = new ArrayList<>();
    }
   return gotRemoved;
 
+}
+@Override
+ public boolean commit(Sensor toComit){
+
+  for(int i = 0 ; i < cache.size() ; i++){
+
+   if(cache.get(i).equals(toComit)){
+      table.add(toComit);
+      cache.remove(i);
+   }
+   return true;
+
+  }
+
+return false;
+}
+@Override
+ public boolean abort (Sensor toAbort){
+
+  for(int i = 0 ; i < cache.size()  ; i++){
+
+   if(cache.get(i).equals(toAbort))
+      cache.remove(i);
+     return true;
+  }
+
+
+  return false;
 }
 }
