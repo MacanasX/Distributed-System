@@ -43,22 +43,21 @@ public class Subscriber extends  Thread implements MqttCallback {
 
     // Subscribe to a topic.
 
-    while(true) {
+
       try {
         client.subscribe(topic);
       } catch (MqttException e) {
         e.printStackTrace();
       }
-      try {
-        Thread.sleep(5000);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
+
     }
-  }
+
 
   public String getCurrentMessage() {
     return currentMessage;
+  }
+  public void clearCurrentMessage(){
+    currentMessage = null;
   }
 
   @Override
@@ -70,7 +69,7 @@ public class Subscriber extends  Thread implements MqttCallback {
   public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
     String arrivedMessage = new String(mqttMessage.getPayload());
    // System.out.println("Message arrived: " + arrivedMessage);
-    myQ.add(arrivedMessage);
+   // myQ.add(arrivedMessage);
     currentMessage = arrivedMessage;
 
   }

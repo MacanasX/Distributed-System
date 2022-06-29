@@ -55,6 +55,7 @@ public class TransactionCoordinator extends  Thread {
         TProtocol protocol = new TBinaryProtocol(transport);
         transport.open();
 
+
         TTransport transport2 = new TSocket(HOST2, PORT);
 
          client = new CRUD.Client(protocol);
@@ -100,7 +101,7 @@ public class TransactionCoordinator extends  Thread {
             e.printStackTrace();
           }
 
-          System.out.println("DB2 aborted!");
+          System.out.println("DB2 aborted sensor!");
 
         }
         if (insertedDB1 && !insertedDB2) {
@@ -111,7 +112,7 @@ public class TransactionCoordinator extends  Thread {
             e.printStackTrace();
           }
 
-          System.out.println("DB1 aborted!");
+          System.out.println("DB1 aborted sensor!");
         }
 
       }

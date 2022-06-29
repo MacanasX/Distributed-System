@@ -26,23 +26,25 @@ public class UDP extends Thread {
     String dest = System.getenv("DESTINATION");
 
     String message = subscriber.getCurrentMessage();
+    subscriber.clearCurrentMessage();
+    if(message != null) {
+      byte[] buffer = message.getBytes();
 
-    byte[] buffer = message.getBytes();
-    InetAddress Address = null;
-    try {
-      Address = InetAddress.getByName(dest);
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
+      InetAddress Address = null;
+      try {
+        Address = InetAddress.getByName(dest);
+      } catch (UnknownHostException e) {
+        e.printStackTrace();
+      }
+      DatagramPacket p = new DatagramPacket(buffer, buffer.length, Address, 1234);
+
+      try {
+        this.udpSocket.send(p);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+
     }
-    DatagramPacket p = new DatagramPacket(buffer, buffer.length, Address, 1234);
-
-    try {
-      this.udpSocket.send(p);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-
   }
 
 }

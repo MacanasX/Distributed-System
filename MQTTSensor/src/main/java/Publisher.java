@@ -51,15 +51,14 @@ public void run() {
 
     try {
       client.publish(Id, message);
+      Thread.sleep(4000);
     } catch (MqttException e) {
+      e.printStackTrace();
+    } catch (InterruptedException e) {
       e.printStackTrace();
     }
     {
-     /* try {
-        Thread.sleep(5000);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      } */
+
     }
 
   }

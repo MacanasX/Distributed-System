@@ -19,11 +19,11 @@ public static ArrayList<Sensor> cache = new ArrayList<>();
   {
    System.out.println("Generated new Table for Sensor");
    cache.add(insert);
-   System.out.println("Inserted " + insert.sensorName + " with Id " + insert.id + " and timestamp " + insert.timestamp + " into Database!" );
+   //System.out.println("Inserted " + insert.sensorName + " with Id " + insert.id + " and timestamp " + insert.timestamp + " into Database!" );
   }
   else{
    cache.add(insert);
-   System.out.println("Inserted " + insert.sensorName + " with Id " + insert.id + " and timestamp " + insert.timestamp + " into Database!" );
+  // System.out.println("Inserted " + insert.sensorName + " with Id " + insert.id + " and timestamp " + insert.timestamp + " into Database!" );
   }
   return true;
  }
@@ -95,8 +95,10 @@ public static ArrayList<Sensor> cache = new ArrayList<>();
    if(cache.get(i).equals(toComit)){
       table.add(toComit);
       cache.remove(i);
+    System.out.println("Inserted " + toComit.sensorName + " with Id " + toComit.id + " and timestamp " + toComit.timestamp + " into Database!" );
+    return true;
    }
-   return true;
+
 
   }
 
