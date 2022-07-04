@@ -1,0 +1,174 @@
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":1 : 74 ms
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":1 : 104 ms
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":1 : 105 ms
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":0 : 106 ms
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":0 : 108 ms
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":0 : 108 ms
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":0 : 109 ms
+Jul 04, 2022 11:51:26 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":1 : 111 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":1 : 2 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":1 : 2 ms
+Jul 04, 2022 11:51:30 AM RttLogger getRtt2
+INFO: The calculated median of the last 10 packets is 82 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":1 : 2 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":2 : 8 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":2 : 9 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":1 : 10 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":2 : 10 ms
+Jul 04, 2022 11:51:30 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":2 : 11 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":3 : 1 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":3 : 2 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":2 : 9 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":3 : 9 ms
+Jul 04, 2022 11:51:34 AM RttLogger getRtt2
+INFO: The calculated median of the last 10 packets is 6 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":2 : 10 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":2 : 13 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":2 : 12 ms
+Jul 04, 2022 11:51:34 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":3 : 13 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":3 : 1 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":3 : 1 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":3 : 2 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":4 : 3 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":3 : 4 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":4 : 3 ms
+Jul 04, 2022 11:51:38 AM RttLogger getRtt2
+INFO: The calculated median of the last 10 packets is 5 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":4 : 4 ms
+Jul 04, 2022 11:51:38 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":4 : 6 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":5 : 1 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":4 : 1 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":5 : 3 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":4 : 4 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":4 : 4 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":5 : 5 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":4 : 5 ms
+Jul 04, 2022 11:51:42 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":5 : 5 ms
+Jul 04, 2022 11:51:46 AM RttLogger getRtt2
+INFO: The calculated median of the last 10 packets is 3 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":6 : 1 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":6 : 3 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":6 : 3 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":6 : 3 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":5 : 4 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":5 : 45 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":5 : 46 ms
+Jul 04, 2022 11:51:46 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":5 : 46 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":7 : 1 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":7 : 1 ms
+Jul 04, 2022 11:51:50 AM RttLogger getRtt2
+INFO: The calculated median of the last 10 packets is 15 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":7 : 2 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":6 : 3 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":6 : 3 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":6 : 3 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":6 : 3 ms
+Jul 04, 2022 11:51:50 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":7 : 4 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":7 : 0 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":7 : 1 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":7 : 1 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":7 : 2 ms
+Jul 04, 2022 11:51:54 AM RttLogger getRtt2
+INFO: The calculated median of the last 10 packets is 2 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":8 : 3 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":8 : 4 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":8 : 3 ms
+Jul 04, 2022 11:51:54 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":8 : 4 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":8 : 2 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":9 : 3 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":9 : 2 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":8 : 3 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":8 : 3 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":8 : 4 ms
+Jul 04, 2022 11:51:58 AM RttLogger getRtt2
+INFO: The calculated median of the last 10 packets is 2 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":9 : 4 ms
+Jul 04, 2022 11:51:58 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":9 : 5 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":5 and "messageId":10 : 1 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":6 and "messageId":10 : 1 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":7 and "messageId":10 : 2 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":1 and "messageId":9 : 2 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":3 and "messageId":9 : 55 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":2 and "messageId":9 : 57 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":4 and "messageId":9 : 56 ms
+Jul 04, 2022 11:52:02 AM TCPresponse run
+INFO: RTT for "sensorId":8 and "messageId":10 : 57 ms
