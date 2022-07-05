@@ -40,6 +40,8 @@ public class TCPHandler extends Thread {
 
 
             HTTPRequest myrequest = new HTTPRequest();
+            TestHTTPcheck request = new TestHTTPcheck();
+            int counter = 0;
             String TCPmessage = "";
 
 
@@ -47,13 +49,24 @@ public class TCPHandler extends Thread {
 
                 String msg = myQ.take();
                 TCPmessage = msg;
-
+                counter ++;
                 //   System.out.println("HIER IST DIE MESSAGE AG WANN DIE MESSUNG LOSGEHT! " + TCPmessage + "!");
-
-                TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
 
 
                 DataOutputStream output = new DataOutputStream(this.TCPsocket.getOutputStream());
+                // HEADER TEST - nur POST-Anfragen sind erlaubt | erhöht die RTT
+                if(counter % 10 == 0){
+                    TCPmessage = request.generateFalseHTTPHeaderGet(TCPmessage);
+                }
+                // Wrong Protocol Test - nur HTTP ist erlaubt
+                else if(counter % 15 == 0){
+                    TCPmessage = request.generateFalseHTTPHeader2(TCPmessage);//"Banane, Apfel, Kirche, Orange, aber, kein,\n Json,String,test"
+                }
+                else {
+                    TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
+                }
+
+
                 // output.writeUTF(myrequest.generateHTTPHeader("hallo welt"));
                 //try{
 

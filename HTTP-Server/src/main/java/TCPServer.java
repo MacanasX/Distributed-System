@@ -51,7 +51,7 @@ public class TCPServer implements Runnable {
         //System.out.println(message);
 
 
-        checkresponse = message.split("\\r?\\n");
+        //checkresponse = message.split("\\r?\\n");
         // checkresponse = message.split(",");
         Socket dest = new Socket(destination, 53258);
 
