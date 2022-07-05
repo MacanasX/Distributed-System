@@ -42,8 +42,6 @@ public class Subscriber extends  Thread implements MqttCallback {
     }
 
     // Subscribe to a topic.
-
-
       try {
         client.subscribe(topic);
       } catch (MqttException e) {

@@ -34,8 +34,8 @@ public class UDPServer extends Thread{
 
     Main.Queues.add(sharedQueue);
     Main.Queues.add(sharedQueue2);
-    Main. Queues.add(sharedQueue3);
-    Main. Queues.add(sharedQueue4);
+    Main.Queues.add(sharedQueue3);
+    Main.Queues.add(sharedQueue4);
 
     Subscriber subscriber = new Subscriber( sharedQueue , "5");
     Subscriber subscriber2 = new Subscriber(sharedQueue2, "6");
@@ -85,11 +85,6 @@ public class UDPServer extends Thread{
           udpThread.start();
 
         }
-
-
-
-        // sender.waitForPullRequest();
-
       }
     }
 

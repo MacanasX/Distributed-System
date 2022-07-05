@@ -1,4 +1,5 @@
 import databaseclient.*;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,13 +21,15 @@ public class TCPServer implements Runnable {
 
     private Socket TCPsocket;
     public static final int PORT = 9090;
-    /** The host the client connects to. */
+    /**
+     * The host the client connects to.
+     */
     public static final String HOST = "Database";
-    public static BlockingQueue<Integer> myReceivedMessagesAfterCommit = new LinkedBlockingQueue<Integer>();
-    public static ArrayList<Integer> myReceivedMessagesAfterCommit2 = new ArrayList<>();
+    // public static BlockingQueue<Integer> myReceivedMessagesAfterCommit = new LinkedBlockingQueue<Integer>();
+    // public static ArrayList<Integer> myReceivedMessagesAfterCommit2 = new ArrayList<>();
 
     TCPServer(Socket mySocket) throws IOException {
-    this.TCPsocket = mySocket;
+        this.TCPsocket = mySocket;
 
 
     }
@@ -48,7 +51,6 @@ public class TCPServer implements Runnable {
         //System.out.println(message);
 
 
-
         checkresponse = message.split("\\r?\\n");
         // checkresponse = message.split(",");
         Socket dest = new Socket(destination, 53258);
@@ -60,7 +62,8 @@ public class TCPServer implements Runnable {
         HTTPPost header = new HTTPPost();
         response = header.checkHtppMessage(message);
 
-        // System.out.println("HIIIIIIER IST checkresponse!!!!!! :" + checkresponse[8]);
+        //experimentelles...
+        // System.out.println("HIER IST checkresponse!!!!!! :" + checkresponse[8]);
         //String splitContent[] = checkresponse[8].split(",");
         //  System.out.println("hier ist die msgID: " + splitContent[2] + " und SensorID: " + splitContent[6]);
         //String msgID = splitContent[2].substring(12, splitContent[2].length());
@@ -73,9 +76,7 @@ public class TCPServer implements Runnable {
         //concurrentMap.take | blockingque
         //myReceivedMessagesAfterCommit.poll(1, TimeUnit.SECONDS);
         //this.wait();
-
-           // Thread.sleep(2000);
-
+        // Thread.sleep(2000);
        /* if(myReceivedMessagesAfterCommit2.contains(hashValue)){
             HTTPPost header = new HTTPPost();
             response = header.checkHtppMessage(message);
@@ -86,27 +87,18 @@ public class TCPServer implements Runnable {
         dataOutputStream.writeUTF(response);
 
 
-        // dataOutputStream.flush();
-        //  dataOutputStream.close()
-
     }
 
 
+    public void run() {
 
+        try {
+            // System.out.println("THREAD ERZEUGT!");
+            this.listen();
+        } catch (IOException | ClassNotFoundException | ParseException | InterruptedException e) {
+            // e.printStackTrace();
+        }
 
-
-
-
-
-public void run(){
-
-    try {
-     // System.out.println("THREAD ERZEUGT!");
-        this.listen();
-    } catch (IOException | ClassNotFoundException | ParseException | InterruptedException e) {
-        e.printStackTrace();
     }
-
-}
 
 }

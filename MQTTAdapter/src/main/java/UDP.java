@@ -13,6 +13,7 @@ public class UDP extends Thread {
   private byte [] buffer;
   private BlockingQueue<String> myQ = null;
   private Subscriber subscriber = null;
+  public static final int httpPort = 1234;
 
   UDP(DatagramSocket udpSocket, InetAddress inetAddress,BlockingQueue<String> myQ,Subscriber subscriber){
 
@@ -36,7 +37,7 @@ public class UDP extends Thread {
       } catch (UnknownHostException e) {
         e.printStackTrace();
       }
-      DatagramPacket p = new DatagramPacket(buffer, buffer.length, Address, 1234);
+      DatagramPacket p = new DatagramPacket(buffer, buffer.length, Address, httpPort); // 1234 HTTPserver
 
       try {
         this.udpSocket.send(p);

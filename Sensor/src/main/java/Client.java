@@ -8,11 +8,11 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Client {
-
+    public static final int iotPort = 1235;
     private DatagramSocket udpSocket;
     private InetAddress inetAddress;
     private byte [] buffer;
-    private Scanner scanner;
+   // private Scanner scanner;
     public static int messageCounterId = 0;
 
     private Client(DatagramSocket datagramsocket, InetAddress inetAddress) throws IOException {
@@ -20,7 +20,7 @@ public class Client {
         this.udpSocket = datagramsocket;
         this.inetAddress = inetAddress;
     }
-    private void waitForPullRequest() throws IOException {
+   /* private void waitForPullRequest() throws IOException {
 
         String msg;
         byte[] buf = new byte[256];
@@ -35,14 +35,14 @@ public class Client {
         }
 
 
-    }
-    private void start()  {
+    }*/
+   /* private void start()  {
         String name = System.getenv("SENSOR_NAME");
         String type = System.getenv("SENSOR_TYPE");
         int sensID = Integer.parseInt(System.getenv("SENSOR_ID"));
 
 
-        Scanner scanner = new Scanner(System.in);
+      //  Scanner scanner = new Scanner(System.in);
         Sensor sensor1 = new Sensor(sensID,name, type);
         SensorData sensorData = new SensorData(sensor1);
 
@@ -70,31 +70,26 @@ public class Client {
                 break;
             }
         }
-    }
+    }*/
     public static void main(String[] args) throws NumberFormatException, IOException {
 
         String dest = System.getenv("DESTINATION");
-        DatagramSocket Socket = new DatagramSocket(1235);
+        DatagramSocket Socket = new DatagramSocket(iotPort); //1235
         InetAddress Address = InetAddress.getByName(dest) ; //InetAddress.getLocalHost()
 
-        Client sender = new Client(Socket,Address);
+        //Client sender = new Client(Socket,Address);
         System.out.println("-- Running UDP Client at " + InetAddress.getLocalHost() + " --");
         while(true){
+
             byte[] buf = new byte[256];
-
             DatagramPacket packet = new DatagramPacket(buf,buf.length);
-
+            //erhalte packet vom iot-Gateway (Pullrequest)
             Socket.receive(packet);
+            // der udpThread bearbeitet die Anfrage
             UDPThread thread =new UDPThread(packet, Socket);
             new Thread(thread).start();
 
-           // sender.waitForPullRequest();
-
-
         }
-
-
-
     }
 }
 

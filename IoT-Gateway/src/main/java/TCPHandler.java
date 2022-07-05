@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,103 +13,75 @@ import java.util.logging.SimpleFormatter;
 
 public class TCPHandler extends Thread {
 
-  private Socket TCPsocket =null;
-  public static volatile ArrayList<String> messageBuffer = new ArrayList<>();
-   public final static Integer LOCK = 0;
-   private SharedBuffer myBuffer = null;
-  private BlockingQueue<String> myQ = null;
-  private String tcp = "";
+    private Socket TCPsocket = null;
+    //public static volatile ArrayList<String> messageBuffer = new ArrayList<>();
+//   public final static Integer LOCK = 0;
+    private SharedBuffer myBuffer = null;
+    private BlockingQueue<String> myQ = null;
+    private String tcp = "";
+    public static final int TcpHttpPort = 53258;
 
 
-  public static long startMilliSeconds;
-//  public static long endeMilliSeconds;
-  TCPHandler(Socket mySocket, BlockingQueue<String> myQ) throws IOException {
+    TCPHandler(Socket mySocket, BlockingQueue<String> myQ) throws IOException {
 
         this.TCPsocket = mySocket;
-      //  this.myBuffer = myBuffer;
-        this.myQ= myQ;
-        this.tcp=  System.getenv("DESTINATIONTCP");
-        //this.logger = Logger.getLogger("MyRTT");
-       // this.filehandler = new FileHandler("/sharedData/RTT/MyRTT.log");
-     //   /file/path/in/container/file /host/local/path/file
+        //  this.myBuffer = myBuffer;
+        this.myQ = myQ;
+        this.tcp = System.getenv("DESTINATIONTCP");
+
     }
 
     public void run() {
-      try {
+        try {
 
-        RttLogger.logger.addHandler(RttLogger.filehandler);
-        SimpleFormatter formatter = new SimpleFormatter();
-        RttLogger.filehandler.setFormatter(formatter);
-
-        //OutputStream outputStream = TCPsocket.getOutputStream();
-       // PrintWriter writer = new PrintWriter(outputStream,true);
-
-      //  OutputStream outputStream = TCPsocket.getOutputStream();
-       // DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-        HTTPRequest myrequest = new HTTPRequest();
-        String TCPmessage = "";
-        int logCounter = 0;
-
-      while (true) {
-
-          String msg = myQ.take();
-          TCPmessage = msg;
-
-       //   System.out.println("HIER IST DIE MESSAGE AG WANN DIE MESSUNG LOSGEHT! " + TCPmessage + "!");
-
-          TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
-          //System.out.println("HIER IST DIE MESSAGE AG WANN DIE MESSUNG LOSGEHT! " + TCPmessage);
-        DataOutputStream output = new DataOutputStream(this.TCPsocket.getOutputStream());
-       // output.writeUTF(myrequest.generateHTTPHeader("hallo welt"));
-        output.writeUTF(TCPmessage);
-
-        //output.writeUTF("halloWelt");
+            RttLogger.logger.addHandler(RttLogger.filehandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            RttLogger.filehandler.setFormatter(formatter);
 
 
-
-         // System.out.println("HIER wird die MESSAGE GESPLITTET!-msgID " + msgID + " und senID " + sensID);
-        //  System.out.println("die groesse des string: " + sensID.length() );
-         // int messageID = Integer.parseInt(String.valueOf(msgID.charAt(10)));
-        //  String sensorID = String.valueOf(sensID.charAt(11)); //length = 13 -2
-          //int test = Integer.parseInt(sensorID);
+            HTTPRequest myrequest = new HTTPRequest();
+            String TCPmessage = "";
 
 
-         // System.out.println("HIER wird die sendMESSAGE GESPLITTET nach CONVERT!-msgID "  + msgID +  " und senID " + sensID );
-         // Calendar calendar = Calendar.getInstance();
-          //hashCode(msgID, sensorID);
-          //sensorID.hashCode();
+            while (true) {
 
-         // hash.hashCode();
-          //   System.out.println("HIER IST DER GEBAUTE sendHASH AUS " + msgID + " " + sensID + " ist gleich: " + hash.hashCode());
-          // hier wird ein eindeutiger key aus SensorID und MessageID gebaut
-          String[] tmpSplit = msg.split(",");
-          String msgID = tmpSplit[2];
-          String sensID = tmpSplit[6];
-          String hash = msgID + sensID;
-          RttLogger.start.put(hash.hashCode(),ZonedDateTime.now().toInstant().toEpochMilli() );
+                String msg = myQ.take();
+                TCPmessage = msg;
 
-        // Getting the time in milliseconds.
+                //   System.out.println("HIER IST DIE MESSAGE AG WANN DIE MESSUNG LOSGEHT! " + TCPmessage + "!");
 
-     //   RttLogger.memory_Start.add(ZonedDateTime.now().toInstant().toEpochMilli());
-        // startMilliSeconds = calendar.getTimeInMillis();
+                TCPmessage = myrequest.generateHTTPHeader(TCPmessage);
 
 
-        //  RttLogger.logger.log(Level.INFO, "Startzeit " + logCounter+ ": " + startMilliSeconds);
-         // System.out.println("test MILLISEKUNDEN: "  + startMilliSeconds);
-        //  logCounter++;
+                DataOutputStream output = new DataOutputStream(this.TCPsocket.getOutputStream());
+                // output.writeUTF(myrequest.generateHTTPHeader("hallo welt"));
+                //try{
 
-          output.flush();
-         this.TCPsocket.close();
-        this.TCPsocket = new Socket(tcp,53257);
-      // output.close();
-         // dataOutputStream.writeUTF(TCPmessage);
-         // dataOutputStream.flush(); // send the message
-         // dataOutputStream.close();
-         // this.TCPsocket.close();
-      }
+                output.writeUTF(TCPmessage);
+                //output.writeUTF("halloWelt");
+
+                  /*}
+                  catch(SocketException e){
+                  }*/
+
+
+                // hier wird ein eindeutiger key aus SensorID und MessageID gebaut für die RTT
+                String[] tmpSplit = msg.split(",");
+                String msgID = tmpSplit[2];
+                String sensID = tmpSplit[6];
+                String hash = msgID + sensID;
+                RttLogger.start.put(hash.hashCode(), ZonedDateTime.now().toInstant().toEpochMilli());
+
+
+                output.flush();
+                this.TCPsocket.close();
+                this.TCPsocket = new Socket(tcp, 53257);
+
+
+            }
         } catch (IOException | InterruptedException e) {
-          e.printStackTrace();
+            e.printStackTrace();
         }
 
-}
+    }
 }

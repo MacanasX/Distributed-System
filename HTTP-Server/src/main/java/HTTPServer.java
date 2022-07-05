@@ -1,4 +1,5 @@
 import databaseclient.Sensor;
+
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -8,9 +9,9 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class HTTPServer {
-   public static BlockingQueue<Sensor> myReceivedMessages = new LinkedBlockingQueue<Sensor>();
-   // public static Queue<Sensor> myReceivedMessages = new LinkedList<>();
-    public static ArrayList<Sensor>myReceivedMessages_List = new ArrayList<>();
+    public static BlockingQueue<Sensor> myReceivedMessages = new LinkedBlockingQueue<Sensor>();
+    // public static Queue<Sensor> myReceivedMessages = new LinkedList<>();
+    public static ArrayList<Sensor> myReceivedMessages_List = new ArrayList<>();
     private ServerSocket server;
 
     public HTTPServer() throws IOException {
@@ -23,18 +24,18 @@ public class HTTPServer {
     public static void main(String[] args) throws IOException {
         System.out.println("-- Running Server at " + InetAddress.getLocalHost() + "--");
         HTTPServer myserver = new HTTPServer();
-      TransactionCoordinator thriftclient = new TransactionCoordinator("Database");
-      thriftclient.start();
-      //thriftclient.listenForMessage();
+        TransactionCoordinator thriftclient = new TransactionCoordinator("Database");
+        thriftclient.start();
+        //thriftclient.listenForMessage();
 
-      while(true) {
+        while (true) {
 
 
-      Socket client = myserver.server.accept();
-      TCPServer myTCPHandler = new TCPServer(client);
-      new Thread(myTCPHandler).start();
+            Socket client = myserver.server.accept();
+            TCPServer myTCPHandler = new TCPServer(client);
+            new Thread(myTCPHandler).start();
 
-  }
+        }
 
     }
 }

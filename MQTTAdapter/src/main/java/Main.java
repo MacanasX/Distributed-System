@@ -12,20 +12,9 @@ public class Main {
 
   public static void main(String[] args) throws SocketException, UnknownHostException {
 
-
     UDPServer udpServer = new UDPServer();
 
-
     udpServer.start();
-
-
-
-
-
-
-
-
-
 
   }
 

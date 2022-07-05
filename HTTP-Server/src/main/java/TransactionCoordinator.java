@@ -1,11 +1,13 @@
 import databaseclient.CRUD;
 import databaseclient.Sensor;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+
 import org.apache.thrift.TException;
 import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
@@ -13,184 +15,164 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
-public class TransactionCoordinator extends  Thread {
+public class TransactionCoordinator extends Thread {
 
-  public static final int PORT = 9090;
-  public static final int PORTDB = 4000;
-  /**
-   * The host the client connects to.
-   */
-  public static final String HOST = "Database";
-  public static final String HOST2 = "Database2";
+    public static final int PORT = 9090;
+    public static final int PORTDB = 4000;
+    /**
+     * The host the client connects to.
+     */
+    public static final String HOST = "Database";
+    public static final String HOST2 = "Database2";
 
-  private Socket socket;
-  private DataInputStream dataInputStream = null;
-  private DataOutputStream dataoutputstream = null;
-  public static ArrayList<String[]> sensorDataMessages = new ArrayList<>();
- // priavete transport
+    //private Socket socket;
+    private DataInputStream dataInputStream = null;
+    private DataOutputStream dataoutputstream = null;
+    // public static ArrayList<String[]> sensorDataMessages = new ArrayList<>();
+    // priavete transport
 
-  boolean insertedDB1= false;
-  boolean insertedDB2= false;
-  CRUD.Client client = null;
-  CRUD.Client client2 = null;
-  Sensor sensorToSend = null;
-  TTransport transport = null;
-  TProtocol protocol = null;
-  TTransport transport2= null;
-  TProtocol protocol2 = null;
+    private boolean insertedDB1 = false;
+    private boolean insertedDB2 = false;
+    private CRUD.Client client = null;
+    private CRUD.Client client2 = null;
+    private Sensor sensorToSend = null;
+    private TTransport transport = null;
+    private TProtocol protocol = null;
+    private TTransport transport2 = null;
+    private TProtocol protocol2 = null;
 
-  TransactionCoordinator(String host) {
+    TransactionCoordinator(String host) {
 
 
-
-     transport = new TSocket(HOST, PORT);
-     protocol = new TBinaryProtocol(transport);
-     client = new CRUD.Client(protocol);
-     transport2 = new TSocket(HOST2, PORT);
-     protocol2 = new TBinaryProtocol(transport2);
-     client2 = new CRUD.Client(protocol2);
+        transport = new TSocket(HOST, PORT);
+        protocol = new TBinaryProtocol(transport);
+        client = new CRUD.Client(protocol);
+        transport2 = new TSocket(HOST2, PORT);
+        protocol2 = new TBinaryProtocol(transport2);
+        client2 = new CRUD.Client(protocol2);
 
    /* this.socket =  null;//new Socket(host, PORTDB);
 
     DataOutputStream dataoutputstream = new DataOutputStream(socket.getOutputStream());
     DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
   */
-  }
-  public void reconectDb() throws InterruptedException, TTransportException {
-
-    Thread.sleep(8000);
-    try {
-      transport.open();
-      transport2.open();
-    }catch (TTransportException e) {
-      System.out.println("Could not connect to Database... Trying again...");
     }
-    for(int i = 0; i<20; i++) {
 
-      if (!transport2.isOpen()) {
-        while (true) {
-          try {
-            transport2.open();
-          }catch (TTransportException e) {
-          }
-          break;
-        }
-      }
-      if (!transport.isOpen()) {
-        while (true) {
-          try {
+    public void reconectDb() throws InterruptedException, TTransportException {
+
+        Thread.sleep(8000);
+        try {
             transport.open();
-          }catch (TTransportException e) {
-          }
-          break;
+            transport2.open();
+        } catch (TTransportException e) {
+            System.out.println("Could not connect to Database... Trying again...");
         }
-      }
+        for (int i = 0; i < 20; i++) {
 
-        if (transport2.isOpen() && transport.isOpen()) {
-          System.out.println("Both Databases are reachable");
-          HTTPServer.myReceivedMessages.clear();
-          run();
+            if (!transport2.isOpen()) {
+                while (true) {
+                    try {
+                        transport2.open();
+                    } catch (TTransportException e) {
+                    }
+                    break;
+                }
+            }
+            if (!transport.isOpen()) {
+                while (true) {
+                    try {
+                        transport.open();
+                    } catch (TTransportException e) {
+                    }
+                    break;
+                }
+            }
+
+            if (transport2.isOpen() && transport.isOpen()) {
+                System.out.println("Both Databases are reachable");
+                HTTPServer.myReceivedMessages.clear();
+                run();
+            }
         }
     }
-  }
 
 
     public void run() {
 
 
-    while (true) {
+        while (true) {
 
-      try {
+            try {
 
-        System.out.print("\nTrying to connect to Database...\n");
+                System.out.print("\nTrying to connect to Database...\n");
 
-        if(!transport.isOpen()) {
-          transport.open();
-          System.out.print("Connection to Database 1 was successful!\n");
-        }
-
-        if(!transport2.isOpen()) {
-          transport2.open();
-          System.out.print("Connection to Database 2 was successful!\n");
-        }
-
-
-            while (true) {
-
-              insertedDB1 = false;
-              insertedDB2 = false;
-
-              sensorToSend = HTTPServer.myReceivedMessages.take();
-
-              insertedDB1 = client.insert(sensorToSend);
-              insertedDB2 = client2.insert(sensorToSend);
-
-              if (insertedDB1 && insertedDB2) {
-
-                client.commit(sensorToSend);
-
-                client2.commit(sensorToSend);
-
-                // hashwert bauen, falls notwendig
-               // String msgID = String.valueOf(sensorToSend.getMessageId());
-               // String sensorID = String.valueOf(sensorToSend.getId());
-               // String hash = msgID + sensorID;
-               // int hashValue = hash.hashCode();
-               // System.out.println("hier wird der HASH AUFGEBAUT (TransactionCoordinator) aus " + msgID + " und " + sensorID + " und das ergibt = " + hashValue);
-               // TCPServer.myReceivedMessagesAfterCommit2.add(hashValue);
-
-                System.out.println("DB1 and DB2 succesfully commited!");
-
-              }
-
-           // }
-            }
-          } catch(TException | InterruptedException a){
-
-            if (!insertedDB1 || !insertedDB2) {
-
-                try {
-                  client.abort(sensorToSend);
-                  client2.abort(sensorToSend);
-                } catch (TException e) {
+                if (!transport.isOpen()) {
+                    transport.open();
+                    System.out.print("Connection to Database 1 was successful!\n");
                 }
 
-              System.out.println("Database is currently not available!");
-
-                try {
-                  transport.close();
-                  transport2.close();
-
-                  reconectDb();
-
-                } catch (InterruptedException | TTransportException e) {
+                if (!transport2.isOpen()) {
+                    transport2.open();
+                    System.out.print("Connection to Database 2 was successful!\n");
                 }
-            }
 
-            /*if (insertedDB1 && !insertedDB2) {
 
-              try {
-                client.abort(sensorToSend);
-              } catch (TException e) {
-                e.printStackTrace();
-              }
+                while (true) {
 
-              System.out.println("DB1 aborted sensor!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    insertedDB1 = false;
+                    insertedDB2 = false;
 
-              try {
-                System.out.println(" bin im TRY/CATCH BLOCK in der run() methode (DB1 aborted sensor!!!)");
+                    sensorToSend = HTTPServer.myReceivedMessages.take();
 
-                transport2.close();
-                reconectDb();
-              } catch (InterruptedException | TTransportException e) {
-                e.printStackTrace();
-              }
-            }*/
+                    insertedDB1 = client.insert(sensorToSend);
+                    insertedDB2 = client2.insert(sensorToSend);
 
-          }//catch
+                    if (insertedDB1 && insertedDB2) {
 
-    }//1.while
-  }//run
+                        client.commit(sensorToSend);
+
+                        client2.commit(sensorToSend);
+
+                        // hashwert bauen, falls notwendig
+                        // String msgID = String.valueOf(sensorToSend.getMessageId());
+                        // String sensorID = String.valueOf(sensorToSend.getId());
+                        // String hash = msgID + sensorID;
+                        // int hashValue = hash.hashCode();
+                        // System.out.println("hier wird der HASH AUFGEBAUT (TransactionCoordinator) aus " + msgID + " und " + sensorID + " und das ergibt = " + hashValue);
+                        // TCPServer.myReceivedMessagesAfterCommit2.add(hashValue);
+
+                        System.out.println("DB1 and DB2 succesfully commited!");
+
+                    }
+
+                    // }
+                }
+            } catch (TException | InterruptedException a) {
+
+                if (!insertedDB1 || !insertedDB2) {
+
+                    try {
+                        client.abort(sensorToSend);
+                        client2.abort(sensorToSend);
+                    } catch (TException e) {
+                    }
+
+                    System.out.println("Database is currently not available!");
+
+                    try {
+                        transport.close();
+                        transport2.close();
+
+                        reconectDb();
+
+                    } catch (InterruptedException | TTransportException e) {
+                    }
+                }
+
+            }//catch
+
+        }//1.while
+    }//run
 }//class
 
 
