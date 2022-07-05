@@ -28,7 +28,8 @@ public class HTTPPost {
               + "Accept-Language: en-US,en;q=0.5" + System.getProperty("line.separator")
               + "Connection: keep-alive" + System.getProperty("line.separator")
               + "Content-Type: application/json; charset=utf-8" + System.getProperty("line.separator")
-              + tmp[6];
+              + tmp[6]
+              + "\nContent: " + tmp[8];
 
 
 
@@ -45,7 +46,7 @@ public class HTTPPost {
           json.get("unit").toString(),json.get("timestamp").toString(),Double.parseDouble(json.get("value").toString()),
           Integer.parseInt(json.get("sensorId").toString()),Integer.parseInt(json.get("messageId").toString())));
 
-    } else if (!isJSON){
+    } else {
       java.util.Date date = new java.util.Date();
       httpHeaderResponse = "HTTP/1.1 404 Not Found /" + System.getProperty("line.separator")
           + "Date: " + date + System.getProperty("line.separator")
@@ -54,9 +55,8 @@ public class HTTPPost {
           + "Accept-Language: en-US,en;q=0.5" + System.getProperty("line.separator")
           + "Connection: keep-alive" + System.getProperty("line.separator")
           + "Content-Type: application/json; charset=utf-8" + System.getProperty("line.separator")
-          + tmp[6];
-
-
+          + tmp[6]
+          + "\nContent: " + tmp[8];
     }
 
 

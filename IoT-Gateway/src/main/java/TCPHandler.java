@@ -19,6 +19,7 @@ public class TCPHandler extends Thread {
   private BlockingQueue<String> myQ = null;
   private String tcp = "";
 
+
   public static long startMilliSeconds;
 //  public static long endeMilliSeconds;
   TCPHandler(Socket mySocket, BlockingQueue<String> myQ) throws IOException {
@@ -60,6 +61,8 @@ public class TCPHandler extends Thread {
         DataOutputStream output = new DataOutputStream(this.TCPsocket.getOutputStream());
        // output.writeUTF(myrequest.generateHTTPHeader("hallo welt"));
         output.writeUTF(TCPmessage);
+
+        //output.writeUTF("halloWelt");
 
 
 

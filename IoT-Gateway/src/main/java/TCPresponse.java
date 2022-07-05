@@ -78,7 +78,7 @@ public class TCPresponse extends Thread {
      //   RttLogger.memory_End.add(ZonedDateTime.now().toInstant().toEpochMilli());
 
         //long endeMilliSeconds = calendar.getTimeInMillis();
-        RttLogger.logger.log(Level.INFO,"RTT for " + sensID.substring(0, sensID.length()-1) + " and " + msgID + " : " + RttLogger.getRtt2(key) +" ms");
+        RttLogger.logger.log(Level.INFO,"RTT for " + sensID.substring(0, sensID.length()-1) + " and " + msgID + " : " + RttLogger.getRtt2(key) +" ms\n");
        //System.out.println(RttLogger.getRtt2() + " das ist die zeit und der counter " + logCounter);
        // RttLogger.endTime = 0;
        // logCounter++;

@@ -26,25 +26,23 @@ public class DatabaseServer {
       TServer server = new TSimpleServer(new TServer.Args(serverTransport).processor(processor));
       System.out.println("Starting Database...");
       server.serve();
+
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 
-  public static void main(String[] args) throws Exception {
-   // handler = new ServerHandler();
-    //processor = new Processor<>(handler);
-   // startSimpleServer(processor);
+    public static void main(String[] args) throws Exception {
+     // handler = new ServerHandler();
+      //processor = new Processor<>(handler);
+     // startSimpleServer(processor);
    // TCPServer tcpserver = new TCPServer();
    // tcpserver.start();
 
-    startSimpleServer(new CRUD.Processor<>(new ServerHandler()));
-   // startSimpleServer(new Calc.Processor<>(new ServerHandler()));
-
-
+      startSimpleServer(new CRUD.Processor<>(new ServerHandler()));
+     // startSimpleServer(new Calc.Processor<>(new ServerHandler()));
 
     }
-
 
   }
 
